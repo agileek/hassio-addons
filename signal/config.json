@@ -1,0 +1,14 @@
+{
+  "name": "Signal",
+  "version": "1",
+  "slug": "signal",
+  "description": "Addon for wrapping signal inside docker",
+  "startup": "before",
+  "boot": "auto",
+  "options": {
+    "phone_number":"+0102030405"
+  },
+  "schema": {
+    "phone_number": "str"
+  }
+}
