@@ -9,7 +9,7 @@
   "boot": "auto",
   "description": "Addon for wrapping signal inside docker",
   "map": [
-    "config"
+    "config:rw"
   ],
   "name": "Signal",
   "options": {
@@ -20,5 +20,5 @@
   },
   "slug": "signal",
   "startup": "before",
-  "version": "4"
+  "version": "5"
 }
