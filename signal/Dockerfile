@@ -1,4 +1,4 @@
-ARG BUILD_FROM
+ARG BUILD_FROM=hassioaddons/base-python:2.0.2
 FROM $BUILD_FROM
 
 ENV LANG C.UTF-8
