@@ -20,5 +20,5 @@
   },
   "slug": "signal",
   "startup": "before",
-  "version": "2"
+  "version": "3"
 }
