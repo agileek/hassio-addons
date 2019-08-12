@@ -1,14 +1,24 @@
 {
-  "name": "Signal",
-  "version": "1",
-  "slug": "signal",
-  "description": "Addon for wrapping signal inside docker",
-  "startup": "before",
+  "arch": [
+    "armhf",
+    "armv7",
+    "aarch64",
+    "amd64",
+    "i386"
+  ],
   "boot": "auto",
+  "description": "Addon for wrapping signal inside docker",
+  "map": [
+    "config"
+  ],
+  "name": "Signal",
   "options": {
-    "phone_number":"+0102030405"
+    "phone_number": "+0102030405"
   },
   "schema": {
     "phone_number": "str"
-  }
+  },
+  "slug": "signal",
+  "startup": "before",
+  "version": "1"
 }
