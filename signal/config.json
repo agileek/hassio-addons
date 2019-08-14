@@ -13,12 +13,14 @@
   ],
   "name": "Signal",
   "options": {
-    "phone_number": "+0102030405"
+    "phone_number": "+0102030405",
+    "signal_cli_path": "/signal-cli-0.6.2",
+    "signal_config_path": "/config/.signal"
   },
   "schema": {
     "phone_number": "str"
   },
   "slug": "signal",
   "startup": "before",
-  "version": "5"
+  "version": "6"
 }
