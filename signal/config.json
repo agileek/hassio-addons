@@ -18,9 +18,11 @@
     "signal_config_path": "/config/.signal"
   },
   "schema": {
-    "phone_number": "str"
+    "phone_number": "str",
+    "signal_cli_path": "str",
+    "signal_config_path": "str"
   },
   "slug": "signal",
   "startup": "before",
-  "version": "6"
+  "version": "7"
 }

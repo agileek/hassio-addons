@@ -1,5 +1,6 @@
 from flask import Flask, request
 import os
+import json
 import subprocess
 
 app = Flask(__name__)
@@ -35,6 +36,7 @@ signal = SignalApplication()
 @app.route('/message', methods=['POST'])
 def message():
     message_to_send = request.get_json()
+    print(json.dumps(message_to_send, indent=4, sort_keys=True))
     number = message_to_send['number']
     message_content = message_to_send['content']
     signal.send_message(number, message_content)

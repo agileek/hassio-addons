@@ -3,7 +3,7 @@ FROM $BUILD_FROM
 
 ENV LANG C.UTF-8
 
-RUN apk add --no-cache jq openjdk8-jre
+RUN apk add --no-cache jq openjdk8-jre haveged
 
 # TODO 2019-08-14 Use DBUS
 #https://github.com/poppyschmo/znc-signal/blob/master/docker/Dockerfile
