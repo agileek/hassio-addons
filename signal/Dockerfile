@@ -1,9 +1,9 @@
 ARG BUILD_FROM=hassioaddons/base-python:2.0.2
 FROM $BUILD_FROM
 
-ENV LANG C.UTF-8
+ENV LANG=C.UTF-8 DEFAULT_JVM_OPTS="-Djava.security.egd=file:/dev/urandom"
 
-RUN apk add --no-cache jq openjdk8-jre haveged
+RUN apk add --no-cache jq openjdk8-jre
 
 # TODO 2019-08-14 Use DBUS
 #https://github.com/poppyschmo/znc-signal/blob/master/docker/Dockerfile
