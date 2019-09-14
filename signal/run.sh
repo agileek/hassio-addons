@@ -8,4 +8,5 @@ export SIGNAL_CONFIG_PATH=$(jq --raw-output ".signal_config_path" ${CONFIG_PATH}
 
 export FLASK_APP=app.py
 cd /app
+dbus-daemon --system --nopidfile
 flask run --host=0.0.0.0

@@ -8,12 +8,12 @@ app = Flask(__name__)
 
 class SignalApplication:
 
-    # def __init__(self):
-    #     self.signal_application_pid = subprocess.Popen(
-    #         SignalApplication.__signal_command(["receive", "-t", "-1", "--json"])).pid
-    #     from time import sleep
-    #     sleep(1)
-    #     print("Process started")
+    def __init__(self):
+        self.signal_application_pid = subprocess.Popen(
+            SignalApplication.__signal_command(["daemon", "--system"])).pid
+        from time import sleep
+        sleep(1)
+        print("Process started")
 
     @staticmethod
     def __signal_command(command):
@@ -25,8 +25,7 @@ class SignalApplication:
                 *command]
 
     def send_message(self, number, message_to_send, attachement=None):
-        my_command = subprocess.run(
-            SignalApplication.__signal_command(['send', '-m', message_to_send, number]), capture_output=True)
+        my_command = subprocess.run(([f'/{os.environ["SIGNAL_CLI_PATH"]}/bin/signal-cli', '--dbus-system', 'send', '-m', message_to_send, number]), capture_output=True)
         print(my_command)
 
 
