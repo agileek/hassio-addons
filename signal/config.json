@@ -8,6 +8,9 @@
   ],
   "boot": "auto",
   "description": "Addon for wrapping signal inside docker",
+  "devices": [
+    "/dev/urandom:/dev/random:ro"
+  ],
   "map": [
     "config:rw"
   ],
@@ -24,5 +27,5 @@
   },
   "slug": "signal",
   "startup": "before",
-  "version": "9.0.2"
+  "version": "9.0.3"
 }

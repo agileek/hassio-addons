@@ -2,7 +2,6 @@ ARG BUILD_FROM=hassioaddons/base-python:2.0.3
 FROM $BUILD_FROM
 
 ENV LANG=C.UTF-8 \
-    DEFAULT_JVM_OPTS="-Djava.security.egd=file:/dev/urandom" \
     JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk \
     PATH="/usr/lib/jvm/java-1.8-openjdk/bin:${PATH}"
 
