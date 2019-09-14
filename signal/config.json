@@ -14,7 +14,7 @@
   "name": "Signal",
   "options": {
     "phone_number": "+0102030405",
-    "signal_cli_path": "/signal-cli-0.6.2",
+    "signal_cli_path": "/signal-cli-0.6.3",
     "signal_config_path": "/config/.signal"
   },
   "schema": {
@@ -24,5 +24,5 @@
   },
   "slug": "signal",
   "startup": "before",
-  "version": "9.0.1"
+  "version": "9.0.2"
 }

@@ -7,7 +7,7 @@ ENV LANG=C.UTF-8 \
     PATH="/usr/lib/jvm/java-1.8-openjdk/bin:${PATH}"
 
 
-ADD https://github.com/AsamK/signal-cli/releases/download/v0.6.2/signal-cli-0.6.2.tar.gz /signal-cli.tar.gz
+ADD https://github.com/AsamK/signal-cli/releases/download/v0.6.3/signal-cli-0.6.3.tar.gz /signal-cli.tar.gz
 ADD http://www.matthew.ath.cx/projects/java/libmatthew-java-0.8.1.tar.gz /libmatthew-java.tar.gz
 
 RUN apk add --no-cache jq openjdk8 dbus build-base && \
