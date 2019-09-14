@@ -25,7 +25,7 @@ class SignalApplication:
                 *command]
 
     def send_message(self, number, message_to_send, attachement=None):
-        my_command = subprocess.run(([f'/{os.environ["SIGNAL_CLI_PATH"]}/bin/signal-cli', '--dbus-system', 'send', '-m', message_to_send, number]), capture_output=True)
+        my_command = subprocess.Popen(f'dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.sendMessage string:"{message_to_send}" array:string: string:"{number}"', shell=True, stdout=subprocess.PIPE)
         print(my_command)
 
 
