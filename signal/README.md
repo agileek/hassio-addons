@@ -26,7 +26,8 @@ signalmessenger:
 notify:
   - name: signal
     platform: signalmessenger
-    receiver: '+the_number_receiving_the_notifications'
+    destinations: 
+        - '+the_number_receiving_the_notifications'
 ```
 
 restart home assistant and it should work.
