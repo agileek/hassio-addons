@@ -57,3 +57,28 @@ You can for example create an automation to send a message when a door is opened
     service: notify.signal
 ```
 
+Or send a screenshot when a movement is detected
+```
+- id: 'movement-detected'
+  alias: Movement detected
+  trigger:
+  - entity_id: binary_sensor.terrace_sensor
+    platform: state
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - alias: ''
+    data:
+      message: Who is it?
+      data:
+        file: /path/to/my/screenshot.png
+    service: notify.signal
+```
+
+### Changelog
+
+* 10.0.0
+  * Breaking change: update the application plugin
+  * Add attachments support
+  

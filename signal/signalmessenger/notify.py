@@ -2,14 +2,14 @@
 Signal Messenger for notify component.
 Place this in `<confdir>/custom_components/signalmessenger/notify.py`
 """
-from urllib import request
-import json
+import requests
 import logging
-from homeassistant.components.notify import (
-    ATTR_DATA, ATTR_TITLE, ATTR_TITLE_DEFAULT, PLATFORM_SCHEMA,
-    BaseNotificationService)
+import json
+from homeassistant.components.notify import (ATTR_DATA, BaseNotificationService)
 
-REQUIREMENTS = []
+ATTR_FILE = "file"
+
+REQUIREMENTS = ["requests==2.22.0"]
 
 _LOGGER = logging.getLogger("signalmessenger")
 
@@ -25,26 +25,29 @@ def get_service(hass, config, discovery_info=None):
         return False
 
     _LOGGER.info("Signal Service initialized")
-    return SignalNotificationService(destination_numbers)
+    return SignalNotificationService(destination_numbers=destination_numbers, url="http://4a36bbd1-signal:5000/message")
 
 
 class SignalNotificationService(BaseNotificationService):
     """Implement the notification service for Join."""
 
-    def __init__(self, destination_numbers):
+    def __init__(self, destination_numbers, url):
         """Initialize the service."""
         self.destination_numbers = destination_numbers
+        self.url = url
 
     def send_message(self, message="", target=None, **kwargs):
         destinations = self.destination_numbers
         if target is not None:
             destinations = target
+        print(kwargs)
+        data = kwargs.get(ATTR_DATA, {})
 
         for destination in destinations:
-            params = json.dumps({"number": destination, "content": message}).encode('utf8')
+            files = {'json': ('data.json', json.dumps({"number": destination, "content": message}), 'application/json')}
+            if ATTR_FILE in data:
+                files['file'] = (data.get(ATTR_FILE), open(data.get(ATTR_FILE), 'rb'), 'application/octet-stream')
+            print(files)
             _LOGGER.info(f'Sending message "{message}" to "{destination}"')
-            req = request.Request("http://4a36bbd1-signal:5000/message",
-                                  data=params,
-                                  headers={'content-type': 'application/json'})
-            resp = request.urlopen(req)
-            _LOGGER.info(resp)
+            response = requests.post(self.url, files=files)
+            _LOGGER.info(response)
