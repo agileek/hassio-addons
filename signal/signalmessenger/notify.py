@@ -40,14 +40,12 @@ class SignalNotificationService(BaseNotificationService):
         destinations = self.destination_numbers
         if target is not None:
             destinations = target
-        print(kwargs)
-        data = kwargs.get(ATTR_DATA, {})
+        data = kwargs.get(ATTR_DATA)
 
         for destination in destinations:
             files = {'json': ('data.json', json.dumps({"number": destination, "content": message}), 'application/json')}
-            if ATTR_FILE in data:
+            if data is not None and ATTR_FILE in data:
                 files['file'] = (data.get(ATTR_FILE), open(data.get(ATTR_FILE), 'rb'), 'application/octet-stream')
-            print(files)
             _LOGGER.info(f'Sending message "{message}" to "{destination}"')
             response = requests.post(self.url, files=files)
             _LOGGER.info(response)
