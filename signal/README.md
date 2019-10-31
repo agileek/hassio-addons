@@ -34,7 +34,7 @@ restart home assistant and it should work.
 
 You can try it in by calling the `notify.signal` service in the developer tools
 
-![Developer Tools](images/developer_tools.png?raw=true "Developer Tools")
+![Developer Tools](images/developer_tools_yaml.png?raw=true "Developer Tools")
 
 
 ## Usage
