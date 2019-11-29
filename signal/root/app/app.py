@@ -5,6 +5,7 @@ import subprocess
 import tempfile
 
 app = Flask(__name__)
+SIGNAL_CLI_PATH = "/signal-cli"
 
 
 class SignalApplication:
@@ -17,7 +18,7 @@ class SignalApplication:
 
     @staticmethod
     def __signal_command(command):
-        return [f'/{os.environ["SIGNAL_CLI_PATH"]}/bin/signal-cli',
+        return [f'/{SIGNAL_CLI_PATH}/bin/signal-cli',
                 "--config",
                 os.environ["SIGNAL_CONFIG_PATH"],
                 "-u",
