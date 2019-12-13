@@ -12,6 +12,6 @@ _LOGGER = logging.getLogger(__name__)
 def setup(hass, config):
     def get_groups(call):
         response = requests.get(f'{signal_url}/group')
-        _LOGGER.info('retrieve groups', response)
+        _LOGGER.info('retrieve groups (status: %d), %s', response.status_code, response.json())
     hass.services.register(DOMAIN, 'get_groups', get_groups)
     return True
