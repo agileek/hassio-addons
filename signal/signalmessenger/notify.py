@@ -7,6 +7,8 @@ import logging
 import json
 from homeassistant.components.notify import (ATTR_DATA, BaseNotificationService)
 
+from .const import signal_url
+
 ATTR_FILE = "file"
 
 REQUIREMENTS = ["requests==2.22.0"]
@@ -25,7 +27,7 @@ def get_service(hass, config, discovery_info=None):
         return False
 
     _LOGGER.info("Signal Service initialized")
-    return SignalNotificationService(destination_numbers=destination_numbers, url="http://4a36bbd1-signal:5000/message")
+    return SignalNotificationService(destination_numbers=destination_numbers, url=f'{signal_url}/message')
 
 
 class SignalNotificationService(BaseNotificationService):
