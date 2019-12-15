@@ -1,8 +1,8 @@
 # Changelog
 
-## 10.3.1
+## 10.3.2
 
-- Can send messages to groups 
+- Fix python code 
 
 ## 10.2.1
 

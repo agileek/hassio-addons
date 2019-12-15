@@ -76,8 +76,6 @@ def groups():
 def message():
     json_data = request.files['json']
     message_to_send = json.loads(json_data.read())
-    number = message_to_send['number']
-    group = message_to_send['group']
     message_content = message_to_send['content']
     attachment = ""
     if 'file' in request.files:
@@ -85,10 +83,10 @@ def message():
         f.write(request.files['file'].read())
         f.flush()
         attachment = f.name
-    if number is not None:
-        signal.send_message_to_number(number=number, message_to_send=message_content, attachment=attachment)
-    if group is not None:
-        signal.send_message_to_group(group=group, message_to_send=message_content, attachment=attachment)
+    if "number" in message_to_send:
+        signal.send_message_to_number(number=message_to_send["number"], message_to_send=message_content, attachment=attachment)
+    if "group" in message_to_send:
+        signal.send_message_to_group(group=message_to_send["group"], message_to_send=message_content, attachment=attachment)
     if 'file' in request.files:
         f.close()
     return "ok"
