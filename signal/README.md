@@ -82,11 +82,4 @@ You can call the service `signalmessenger.get_groups` it will log the "GroupId"/
 Can be used to retrieve the groupIds to send messages to groups (Coming soon)
 
 
-## Changelog
-
-* 10.2.0
-  * Can retrieve groups 
-* 10.0.0
-  * Breaking change: update the application plugin
-  * Add attachments support
-  
+## [Changelog](CHANGELOG.md)
