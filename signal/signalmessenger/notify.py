@@ -45,7 +45,11 @@ class SignalNotificationService(BaseNotificationService):
         data = kwargs.get(ATTR_DATA)
 
         for destination in destinations:
-            files = {'json': ('data.json', json.dumps({"number": destination, "content": message}), 'application/json')}
+            if destination.startswith("+"):
+                key = "number"
+            else:
+                key = "group"
+            files = {'json': ('data.json', json.dumps({key: destination, "content": message}), 'application/json')}
             if data is not None and ATTR_FILE in data:
                 files['file'] = (data.get(ATTR_FILE), open(data.get(ATTR_FILE), 'rb'), 'application/octet-stream')
             _LOGGER.info(f'Sending message "{message}" to "{destination}"')
