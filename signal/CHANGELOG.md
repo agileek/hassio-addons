@@ -1,5 +1,10 @@
 # Changelog
 
+## 10.3.3
+
+- Fix group sending: sendGroupMessage needs an array of byte, not a string  
+- Patch update hassioaddons/base-python 3.0.1 --> 3.0.2
+
 ## 10.3.2
 
 - Fix python code 

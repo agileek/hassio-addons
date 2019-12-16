@@ -39,7 +39,7 @@ class SignalApplication:
         print(f'Sending {message_to_send} to {group}, with attachment {attachment}')
         group_to_byte = ','.join([f'0x{group[i:i+2]}' for i in range(0, len(group), 2)])
         my_command = subprocess.Popen(
-            f'dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.sendGroupMessage string:"{message_to_send}" array:string:"{attachment}" string:"{group_to_byte}"',
+            f'dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.sendGroupMessage string:"{message_to_send}" array:string:"{attachment}" array:byte:"{group_to_byte}"',
             shell=True, stdout=subprocess.PIPE)
         my_command.wait()
         print(my_command)
