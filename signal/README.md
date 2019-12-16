@@ -16,7 +16,7 @@ After that, you can install the hassio signal addon
 You have to install the homeassistant part too, if you want it to work.
 This part right now is a manual process, I don't know if we can automate it.
 
-Just copy signalmessenger to the custom_copmonents folder in your configuration directory
+Just copy signalmessenger to the custom_components folder in your configuration directory
 `cp -R signalmessenger/ /config/custom_components/signalmessenger/`
 
 Activate the plugin in your configuration.yaml 
@@ -28,6 +28,7 @@ notify:
     platform: signalmessenger
     destinations: 
         - '+the_number_receiving_the_notifications'
+        - 'the_group_id_receiveng_the_notifications'
 ```
 
 restart home assistant and it should work.
@@ -76,10 +77,24 @@ Or send a screenshot when a movement is detected
     service: notify.signal
 ```
 
-### Retrieve groups
+### Groups
 
-You can call the service `signalmessenger.get_groups` it will log the "GroupId"/"Name" this user is associated to.
-Can be used to retrieve the groupIds to send messages to groups (Coming soon)
+You can send messages to groups. The tricky part here is to get the group Id.
+
+To do that, a service exists that lists the different groups the user is in.
+
+![Groups](images/get_groups.png?raw=true "Retrieve Groups")
+
+This will log something like that in home assistant:
+
+```
+2019-12-16 08:51:41 INFO (SyncWorker_18) [custom_components.signalmessenger] retrieve groups (status: 200), {'GroupName': 'hexadecimalgroupid1', 'Group name 2': 'hexadecimalgroupid2'}
+```
+
+Once you have the group ids, you can easily send messages by using the `notify.signal` service. Just use the groupid in the target parameter.
+
+![Send to Group](images/send_to_group.png?raw=true "Send to group")
+
 
 
 ## [Changelog](CHANGELOG.md)
