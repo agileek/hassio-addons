@@ -10,6 +10,7 @@ SIGNAL_CLI_PATH = "/signal-cli"
 
 group_id_matcher = re.compile(r'^[0-9a-f ]+\n$')
 
+
 class SignalApplication:
 
     def __init__(self):
@@ -90,7 +91,3 @@ def message():
     if 'file' in request.files:
         f.close()
     return "ok"
-
-
-if __name__ == "__main__":
-    app.run(debug=False)

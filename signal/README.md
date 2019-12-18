@@ -28,7 +28,7 @@ notify:
     platform: signalmessenger
     destinations: 
         - '+the_number_receiving_the_notifications'
-        - 'the_group_id_receiveng_the_notifications'
+        - 'the_group_id_receiving_the_notifications'
 ```
 
 restart home assistant and it should work.
