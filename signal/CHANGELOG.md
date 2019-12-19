@@ -1,5 +1,9 @@
 # Changelog
 
+## 10.4.1
+
+- Refactor to make the application testable
+
 ## 10.4.0
 
 - Dont launch flask anymore, use gunicorn
