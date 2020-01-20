@@ -92,4 +92,21 @@ def app(injected_signal=None):
         if 'file' in request.files:
             f.close()
         return "ok"
+
+    # COMPATIBILITY LAYER WITH OFFICIAL HOME ASSISTANT INTEGRATION
+
+    @app.route('/v1/send', methods=['POST'])
+    def official_integration_send_message():
+        message_to_send = request['message']
+        # number = request['number']
+        recipients = request['recipients']
+        attachment = ""
+        if 'base64_attachment' in request:
+            attachment = request['base64_attachment']
+        for recipient in recipients:
+            if recipient.startswith('+'):
+                signal.send_message_to_number(number=recipient, message_to_send=message_to_send, attachment=attachment)
+            else:
+                signal.send_message_to_group(group=recipient, message_to_send=message_to_send, attachment=attachment)
+        return "ok"
     return app

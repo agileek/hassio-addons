@@ -1,5 +1,10 @@
 # Changelog
 
+## 10.5.0
+
+- Compatible with official home assistant signal integration
+- the url is http://4a36bbd1-signal:5000
+
 ## 10.4.1
 
 - Refactor to make the application testable
