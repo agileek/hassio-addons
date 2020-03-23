@@ -97,7 +97,7 @@ def app(injected_signal=None):
 
     @app.route('/v1/send', methods=['POST'])
     def official_integration_send_message():
-        response = request.json()
+        response = request.get_json()
         message_to_send = response['message']
         # number = response['number']
         recipients = response['recipients']

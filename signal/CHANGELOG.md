@@ -1,5 +1,9 @@
 # Changelog
 
+## 10.5.2
+
+- Really fix compatibility problem with official signal integration
+
 ## 10.5.1
 
 - Fix compatibility problem with official signal integration
