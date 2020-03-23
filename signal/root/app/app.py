@@ -97,12 +97,13 @@ def app(injected_signal=None):
 
     @app.route('/v1/send', methods=['POST'])
     def official_integration_send_message():
-        message_to_send = request['message']
-        # number = request['number']
-        recipients = request['recipients']
+        response = request.json()
+        message_to_send = response['message']
+        # number = response['number']
+        recipients = response['recipients']
         attachment = ""
-        if 'base64_attachment' in request:
-            attachment = request['base64_attachment']
+        if 'base64_attachment' in response:
+            attachment = response['base64_attachment']
         for recipient in recipients:
             if recipient.startswith('+'):
                 signal.send_message_to_number(number=recipient, message_to_send=message_to_send, attachment=attachment)
