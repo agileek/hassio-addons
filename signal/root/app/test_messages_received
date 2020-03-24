@@ -1,0 +1,273 @@
+Envelope from: +330102030405 (device: 2)
+Timestamp: 1585029602621 (2020-03-24T06:00:02.621Z)
+Got receipt.
+
+Envelope from:  (device: 0)
+Timestamp: 1585035919367 (2020-03-24T07:45:19.367Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Received a receipt message
+ - When: 1585035919367 (2020-03-24T07:45:19.367Z)
+ - Is read receipt
+ - Timestamps:
+    1585029602621 (2020-03-24T06:00:02.621Z)
+
+Envelope from:  (device: 0)
+Timestamp: 1585035924639 (2020-03-24T07:45:24.639Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Received a typing message
+ - Action: STARTED
+ - Timestamp: 1585035924639 (2020-03-24T07:45:24.639Z)
+  Name: Maison
+
+Envelope from:  (device: 0)
+Timestamp: 1585035930352 (2020-03-24T07:45:30.352Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Received a typing message
+ - Action: STOPPED
+ - Timestamp: 1585035930352 (2020-03-24T07:45:30.352Z)
+  Name: Maison
+
+Envelope from:  (device: 0)
+Timestamp: 1585035932918 (2020-03-24T07:45:32.918Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Message timestamp: 1585035932918 (2020-03-24T07:45:32.918Z)
+Body: Hello there
+Group info:
+  Id: base64Id==
+  Name: Maison
+  Type: DELIVER
+
+Envelope from:  (device: 0)
+Timestamp: 1585035958178 (2020-03-24T07:45:58.178Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Received a typing message
+ - Action: STARTED
+ - Timestamp: 1585035958178 (2020-03-24T07:45:58.178Z)
+  Name: Maison
+
+Envelope from:  (device: 0)
+Timestamp: 1585035960656 (2020-03-24T07:46:00.656Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Message timestamp: 1585035960656 (2020-03-24T07:46:00.656Z)
+Body: Polp
+Group info:
+  Id: base64Id==
+  Name: Maison
+  Type: DELIVER
+
+Envelope from:  (device: 0)
+Timestamp: 1585035964432 (2020-03-24T07:46:04.432Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Received a typing message
+ - Action: STARTED
+ - Timestamp: 1585035964432 (2020-03-24T07:46:04.432Z)
+  Name: Maison
+
+Envelope from:  (device: 0)
+Timestamp: 1585035968139 (2020-03-24T07:46:08.139Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Message timestamp: 1585035968139 (2020-03-24T07:46:08.139Z)
+Body: Comment \xc3\xa7a va ?
+Group info:
+  Id: base64Id==
+  Name: Maison
+  Type: DELIVER
+
+Envelope from:  (device: 0)
+Timestamp: 1585035969424 (2020-03-24T07:46:09.424Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Received a typing message
+ - Action: STARTED
+ - Timestamp: 1585035969424 (2020-03-24T07:46:09.424Z)
+  Name: Maison
+
+Envelope from:  (device: 0)
+Timestamp: 1585035979425 (2020-03-24T07:46:19.425Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Received a typing message
+ - Action: STARTED
+ - Timestamp: 1585035979425 (2020-03-24T07:46:19.425Z)
+  Name: Maison
+
+Envelope from:  (device: 0)
+Timestamp: 1585035982672 (2020-03-24T07:46:22.672Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Message timestamp: 1585035982672 (2020-03-24T07:46:22.672Z)
+Body: T'es s\xc3\xbbr que \xc3\xa7a va bien ?
+Sur plusieurs lignes \xc3\xa7a va aussi ?
+
+Vraiment ?
+Group info:
+  Id: base64Id==
+  Name: Maison
+  Type: DELIVER
+
+Envelope from:  (device: 0)
+Timestamp: 1585035987397 (2020-03-24T07:46:27.397Z)
+Sent by unidentified/sealed sender
+Sender: +330605040302 (device: 1)
+Message timestamp: 1585035987397 (2020-03-24T07:46:27.397Z)
+Body: Tu fais un avc mon c\xc5\x93ur ? Tu parles a notre maison
+Group info:
+  Id: base64Id==
+  Name: Maison
+  Type: DELIVER
+
+Envelope from:  (device: 0)
+Timestamp: 1585035996034 (2020-03-24T07:46:36.034Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Received a typing message
+ - Action: STARTED
+ - Timestamp: 1585035996034 (2020-03-24T07:46:36.034Z)
+  Name: Maison
+
+Envelope from:  (device: 0)
+Timestamp: 1585035997428 (2020-03-24T07:46:37.428Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Message timestamp: 1585035997428 (2020-03-24T07:46:37.428Z)
+Body: Hahahahah
+Group info:
+  Id: base64Id==
+  Name: Maison
+  Type: DELIVER
+
+Envelope from:  (device: 0)
+Timestamp: 1585035997972 (2020-03-24T07:46:37.972Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Received a typing message
+ - Action: STARTED
+ - Timestamp: 1585035997972 (2020-03-24T07:46:37.972Z)
+  Name: Maison
+
+Envelope from:  (device: 0)
+Timestamp: 1585036003838 (2020-03-24T07:46:43.838Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Message timestamp: 1585036003838 (2020-03-24T07:46:43.838Z)
+Body: Je me suis tromp\xc3\xa9, je fais des tests :)
+Group info:
+  Id: base64Id==
+  Name: Maison
+  Type: DELIVER
+
+Envelope from:  (device: 0)
+Timestamp: 1585036004380 (2020-03-24T07:46:44.380Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Received a typing message
+ - Action: STARTED
+ - Timestamp: 1585036004380 (2020-03-24T07:46:44.380Z)
+  Name: Maison
+
+Envelope from:  (device: 0)
+Timestamp: 1585036014381 (2020-03-24T07:46:54.381Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Received a typing message
+ - Action: STARTED
+ - Timestamp: 1585036014381 (2020-03-24T07:46:54.381Z)
+  Name: Maison
+
+Envelope from:  (device: 0)
+Timestamp: 1585036014585 (2020-03-24T07:46:54.585Z)
+Sent by unidentified/sealed sender
+Sender: +330605040302 (device: 1)
+Message timestamp: 1585036014585 (2020-03-24T07:46:54.585Z)
+Body: Hihi
+Group info:
+  Id: base64Id==
+  Name: Maison
+  Type: DELIVER
+
+Envelope from:  (device: 0)
+Timestamp: 1585036018365 (2020-03-24T07:46:58.365Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Message timestamp: 1585036018365 (2020-03-24T07:46:58.365Z)
+b"Body: D'habitude je parle \xc3\xa0 la maison oui, mais qu'on priv\xc3\xa9"
+Group info:
+  Id: base64Id==
+  Name: Maison
+  Type: DELIVER
+
+Envelope from:  (device: 0)
+Timestamp: 1585036018866 (2020-03-24T07:46:58.866Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Received a typing message
+ - Action: STARTED
+ - Timestamp: 1585036018866 (2020-03-24T07:46:58.866Z)
+  Name: Maison
+
+Envelope from:  (device: 0)
+Timestamp: 1585036022517 (2020-03-24T07:47:02.517Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Message timestamp: 1585036022517 (2020-03-24T07:47:02.517Z)
+Body: Hahaha quel couillon
+Group info:
+  Id: base64Id==
+  Name: Maison
+  Type: DELIVER
+
+Envelope from:  (device: 0)
+Timestamp: 1585036026614 (2020-03-24T07:47:06.614Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Received a typing message
+ - Action: STARTED
+ - Timestamp: 1585036026614 (2020-03-24T07:47:06.614Z)
+
+Envelope from:  (device: 0)
+Timestamp: 1585036027540 (2020-03-24T07:47:07.540Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Message timestamp: 1585036027540 (2020-03-24T07:47:07.540Z)
+Body: Plop
+Profile key update, key length:32
+
+Envelope from:  (device: 0)
+Timestamp: 1585036048136 (2020-03-24T07:47:28.136Z)
+Sent by unidentified/sealed sender
+Sender: +330605040302 (device: 1)
+Message timestamp: 1585036048136 (2020-03-24T07:47:28.136Z)
+Body: Grill\xc3\xa9
+Group info:
+  Id: base64Id==
+  Name: Maison
+  Type: DELIVER
+
+Envelope from:  (device: 0)
+Timestamp: 1585036052937 (2020-03-24T07:47:32.937Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Received a typing message
+ - Action: STARTED
+ - Timestamp: 1585036052937 (2020-03-24T07:47:32.937Z)
+  Name: Maison
+
+Envelope from:  (device: 0)
+Timestamp: 1585036055414 (2020-03-24T07:47:35.414Z)
+Sent by unidentified/sealed sender
+Sender: +330102030405 (device: 2)
+Message timestamp: 1585036055414 (2020-03-24T07:47:35.414Z)
+Body: Hihihihihihi grave
+Group info:
+  Id: base64Id==
+  Name: Maison
+  Type: DELIVER
+

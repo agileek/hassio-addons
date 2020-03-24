@@ -1,3 +1,5 @@
+import threading
+
 from flask import Flask, request
 import os
 import json
@@ -9,11 +11,76 @@ SIGNAL_CLI_PATH = "/signal-cli"
 group_id_matcher = re.compile(r'^[0-9a-f ]+\n$')
 
 
+class SignalMessage:
+    keywords = ["Envelope from",
+                "Timestamp",
+                "Sender",
+                "Message timestamp",
+                "Body",
+                "Group info",
+                "  Id"
+                "  Type"
+                " - When",
+                " - Is read receipt",
+                " - Timestamps",
+                " - Action",
+                " - Timestamp",
+                "  Name",
+                "Profile key update, key length"]
+    keywords_without_data = [
+        "Sent by unidentified/sealed sender",
+        "Got receipt.",
+        "Received a receipt message",
+        "Received a typing message",
+    ]
+
+    def __init__(self):
+        self.constructing_message = {}
+        self.start_message = False
+        self.messages = []
+        self.body_start = False
+
+    def __line_contains_keyword__(self, line: str):
+        for keyword in SignalMessage.keywords + SignalMessage.keywords_without_data:
+            if line.startswith(keyword):
+                return True
+        return False
+
+    def new_line_received(self, line: str):
+        if self.body_start:
+            if self.__line_contains_keyword__(line):
+                self.body_start = False
+                self.messages.append(self.constructing_message)
+                self.constructing_message = {}
+            else:
+                self.constructing_message['message'] = self.constructing_message['message'] + '\n' + line
+        if line.startswith("Sender:"):
+            self.constructing_message['sender'] = line.split(' ')[1]
+        if line.startswith("Body:"):
+            self.body_start = True
+            self.constructing_message['message'] = line[6:]
+
+    def get_messages(self):
+        return self.messages
+
+
+def receive_signal_messages(signal_process: subprocess.Popen, signal_messages: SignalMessage):
+    for line in iter(signal_process.stdout.readline, ''):
+        print('plop')
+        signal_messages.new_line_received(line.rstrip())
+        print(line.rstrip())
+
+
 class SignalApplication:
 
     def __init__(self, executor=subprocess):
-        self.signal_application_pid = executor.Popen(SignalApplication.__signal_command(["daemon", "--system"])).pid
+        self.signal_messages = SignalMessage()
+        self.signal_application = executor.Popen(SignalApplication.__signal_command(["daemon", "--system"]),
+                                                 stdout=subprocess.PIPE)
         self.executor = executor
+        self.receive_thread = threading.Thread(target=receive_signal_messages,
+                                               args=(self.signal_application, self.signal_messages), daemon=True)
+        self.receive_thread.start()
         print("Process started")
 
     @staticmethod
@@ -32,10 +99,10 @@ class SignalApplication:
             shell=True, stdout=self.executor.PIPE)
         my_command.wait()
         print(my_command)
-        
+
     def send_message_to_group(self, group, message_to_send, attachment):
         print(f'Sending {message_to_send} to {group}, with attachment {attachment}')
-        group_to_byte = ','.join([f'0x{group[i:i+2]}' for i in range(0, len(group), 2)])
+        group_to_byte = ','.join([f'0x{group[i:i + 2]}' for i in range(0, len(group), 2)])
         my_command = self.executor.Popen(
             f'dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.sendGroupMessage string:"{message_to_send}" array:string:"{attachment}" array:byte:"{group_to_byte}"',
             shell=True, stdout=self.executor.PIPE)
@@ -45,7 +112,8 @@ class SignalApplication:
     def get_groups(self):
         print(f'Retrieving groups')
         groups_command = self.executor.Popen(
-            f'dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.getGroupIds', shell=True, stdout=self.executor.PIPE)
+            f'dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.getGroupIds',
+            shell=True, stdout=self.executor.PIPE)
         groups_command.wait()
         groups = {}
         for group_id_raw in groups_command.stdout.readlines():
@@ -54,7 +122,8 @@ class SignalApplication:
                 group_byte = ','.join([f'0x{i}' for i in group_id_decoded.strip().split(' ')])
                 group_hexa = ''.join(group_id_decoded.strip().split(' '))
                 group_name_command = self.executor.Popen(
-                    f'dbus-send --system --type=method_call --print-reply=literal --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.getGroupName array:byte:{group_byte}', shell=True, stdout=subprocess.PIPE)
+                    f'dbus-send --system --type=method_call --print-reply=literal --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.getGroupName array:byte:{group_byte}',
+                    shell=True, stdout=subprocess.PIPE)
                 group_name_command.wait()
                 group_name = group_name_command.stdout.readline()
                 print(f'Name: {group_name.decode("ascii").strip()}, id: {group_hexa}')
@@ -69,7 +138,7 @@ def app(injected_signal=None):
         signal = SignalApplication()
 
     app = Flask(__name__)
-    
+
     @app.route('/group', methods=['GET'])
     def groups():
         return signal.get_groups()
@@ -86,9 +155,11 @@ def app(injected_signal=None):
             f.flush()
             attachment = f.name
         if "number" in message_to_send:
-            signal.send_message_to_number(number=message_to_send["number"], message_to_send=message_content, attachment=attachment)
+            signal.send_message_to_number(number=message_to_send["number"], message_to_send=message_content,
+                                          attachment=attachment)
         if "group" in message_to_send:
-            signal.send_message_to_group(group=message_to_send["group"], message_to_send=message_content, attachment=attachment)
+            signal.send_message_to_group(group=message_to_send["group"], message_to_send=message_content,
+                                         attachment=attachment)
         if 'file' in request.files:
             f.close()
         return "ok"
@@ -110,4 +181,5 @@ def app(injected_signal=None):
             else:
                 signal.send_message_to_group(group=recipient, message_to_send=message_to_send, attachment=attachment)
         return "ok"
+
     return app
