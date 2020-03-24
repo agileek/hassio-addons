@@ -107,8 +107,6 @@ def test_signal_message_discard_receipt():
 def test_signal_message_utf8():
     tested = SignalMessage()
 
-    assert [] == tested.get_messages()
-
     tested.new_line_received('Envelope from:  (device: 0)')
     tested.new_line_received('Timestamp: 1585035968139 (2020-03-24T07:46:08.139Z)')
     tested.new_line_received('Sent by unidentified/sealed sender')
@@ -126,9 +124,6 @@ def test_signal_message_utf8():
 def test_signal_message_multiline():
     tested = SignalMessage()
 
-    assert [] == tested.get_messages()
-
-
     tested.new_line_received('Envelope from:  (device: 0)')
     tested.new_line_received('Timestamp: 1585035982672 (2020-03-24T07:46:22.672Z)')
     tested.new_line_received('Sent by unidentified/sealed sender')
@@ -143,7 +138,31 @@ def test_signal_message_multiline():
     tested.new_line_received('Name: Maison')
     tested.new_line_received('Type: DELIVER')
 
-    assert [{'message': 'T\'es sûr que ça va bien ?\nSur plusieurs lignes ça va aussi ?\n\nVraiment ?', 'sender': '+330102030405'}] == tested.get_messages()
+    assert [{'message': 'T\'es sûr que ça va bien ?\nSur plusieurs lignes ça va aussi ?\n\nVraiment ?',
+             'sender': '+330102030405'}] == tested.get_messages()
 
 
-# TODO 2020-03-24: If a message ends with nothing, how can we detect the end of body vs the end of the envelope message?
+def test_signal_message():
+    tested = SignalMessage()
+    with open(f'/{os.path.dirname(__file__)}/test_messages_received', "r") as file:
+        for line in file.readlines():
+            tested.new_line_received(line)
+    assert [
+               {'message': 'Hello there\n', 'sender': '+330102030405'},
+               {'message': 'Polp\n', 'sender': '+330102030405'},
+               {'message': 'Comment \\xc3\\xa7a va ?\n', 'sender': '+330102030405'},
+               {
+                   'message': "T'es s\\xc3\\xbbr que \\xc3\\xa7a va bien ?\n\nSur plusieurs lignes \\xc3\\xa7a va aussi ?\n\n\n\nVraiment ?\n",
+                   'sender': '+330102030405'},
+               {'message': 'Tu fais un avc mon c\\xc5\\x93ur ? Tu parles a notre maison\n',
+                'sender': '+330605040302'},
+               {'message': 'Hahahahah\n', 'sender': '+330102030405'},
+               {'message': 'Je me suis tromp\\xc3\\xa9, je fais des tests :)\n',
+                'sender': '+330102030405'},
+               {'message': 'Hihi\n', 'sender': '+330605040302'},
+               {'message': 'D\'habitude je parle \\xc3\\xa0 la maison oui, mais qu\'on priv\\xc3\\xa9\n', 'sender': '+330102030405'},
+               {'message': 'Hahaha quel couillon\n', 'sender': '+330102030405'},
+               {'message': 'Plop\n', 'sender': '+330102030405'},
+               {'message': 'Grill\\xc3\\xa9\n', 'sender': '+330605040302'},
+               {'message': 'Hihihihihihi grave\n', 'sender': '+330102030405'}
+           ] == tested.get_messages()

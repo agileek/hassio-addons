@@ -54,9 +54,9 @@ class SignalMessage:
                 self.constructing_message = {}
             else:
                 self.constructing_message['message'] = self.constructing_message['message'] + '\n' + line
-        if line.startswith("Sender:"):
+        if line.startswith('Sender:'):
             self.constructing_message['sender'] = line.split(' ')[1]
-        if line.startswith("Body:"):
+        if line.startswith('Body:'):
             self.body_start = True
             self.constructing_message['message'] = line[6:]
 
@@ -66,9 +66,8 @@ class SignalMessage:
 
 def receive_signal_messages(signal_process: subprocess.Popen, signal_messages: SignalMessage):
     for line in iter(signal_process.stdout.readline, ''):
-        print('plop')
-        signal_messages.new_line_received(line.rstrip())
-        print(line.rstrip())
+        cleaned_line = line.decode('utf8').rstrip()
+        signal_messages.new_line_received(cleaned_line)
 
 
 class SignalApplication:

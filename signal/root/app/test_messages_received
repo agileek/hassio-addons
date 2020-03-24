@@ -198,7 +198,7 @@ Timestamp: 1585036018365 (2020-03-24T07:46:58.365Z)
 Sent by unidentified/sealed sender
 Sender: +330102030405 (device: 2)
 Message timestamp: 1585036018365 (2020-03-24T07:46:58.365Z)
-b"Body: D'habitude je parle \xc3\xa0 la maison oui, mais qu'on priv\xc3\xa9"
+Body: D'habitude je parle \xc3\xa0 la maison oui, mais qu'on priv\xc3\xa9
 Group info:
   Id: base64Id==
   Name: Maison
