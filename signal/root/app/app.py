@@ -2,94 +2,21 @@ import threading
 
 from flask import Flask, request
 import os
+import asyncio
 import json
 import subprocess
 import tempfile
 import re
+from signal_message import SignalMessage
+from ws import send_message
 
 SIGNAL_CLI_PATH = "/signal-cli"
 group_id_matcher = re.compile(r'^[0-9a-f ]+\n$')
 
 
-class SignalMessage:
-    keywords = ["Envelope from",
-                "Timestamp",
-                "Sender",
-                "Message timestamp",
-                "Body",
-                "Group info",
-                "  Id"
-                "  Type"
-                " - When",
-                " - Is read receipt",
-                " - Timestamps",
-                " - Action",
-                " - Timestamp",
-                "  Name",
-                "Profile key update, key length"]
-    keywords_without_data = [
-        "Sent by unidentified/sealed sender",
-        "Got receipt.",
-        "Received a receipt message",
-        "Received a typing message",
-    ]
-
-    def __init__(self):
-        self.constructing_message = {}
-        self.start_message = False
-        self.messages = []
-        self.body_start = False
-
-    def __line_contains_keyword__(self, line: str):
-        for keyword in SignalMessage.keywords + SignalMessage.keywords_without_data:
-            if line.startswith(keyword):
-                return True
-        return False
-
-    def new_line_received(self, line: str):
-        if self.body_start:
-            if self.__line_contains_keyword__(line):
-                self.body_start = False
-                self.messages.append(self.constructing_message)
-                self.constructing_message = {}
-            else:
-                self.constructing_message['message'] = self.constructing_message['message'] + '\n' + line
-        if line.startswith('Sender:'):
-            self.constructing_message['sender'] = line.split(' ')[1]
-        if line.startswith('Body:'):
-            self.body_start = True
-            self.constructing_message['message'] = line[6:]
-
-    def get_messages(self):
-        return self.messages
-
-
-def receive_signal_messages(signal_process: subprocess.Popen, signal_messages: SignalMessage):
-    for line in iter(signal_process.stdout.readline, ''):
-        cleaned_line = line.decode('utf8').rstrip()
-        signal_messages.new_line_received(cleaned_line)
-
-
-class SignalApplication:
-
+class SignalMessageSender:
     def __init__(self, executor=subprocess):
-        self.signal_messages = SignalMessage()
-        self.signal_application = executor.Popen(SignalApplication.__signal_command(["daemon", "--system"]),
-                                                 stdout=subprocess.PIPE)
         self.executor = executor
-        self.receive_thread = threading.Thread(target=receive_signal_messages,
-                                               args=(self.signal_application, self.signal_messages), daemon=True)
-        self.receive_thread.start()
-        print("Process started")
-
-    @staticmethod
-    def __signal_command(command):
-        return [f'/{SIGNAL_CLI_PATH}/bin/signal-cli',
-                "--config",
-                os.environ["SIGNAL_CONFIG_PATH"],
-                "-u",
-                os.environ["PHONE_NUMBER"],
-                *command]
 
     def send_message_to_number(self, number, message_to_send, attachment):
         print(f'Sending {message_to_send} to {number}, with attachment {attachment}')
@@ -128,6 +55,49 @@ class SignalApplication:
                 print(f'Name: {group_name.decode("ascii").strip()}, id: {group_hexa}')
                 groups[group_name.decode("ascii").strip()] = group_hexa
         return groups
+
+
+def receive_signal_messages(signal_process: subprocess.Popen, signal_messages: SignalMessage,
+                            signal_sender: SignalMessageSender):
+    for line in iter(signal_process.stdout.readline, ''):
+        cleaned_line = line.decode('utf8').rstrip()
+        signal_messages.new_line_received(cleaned_line)
+        message_received = signal_messages.read_message()
+        if message_received != {}:
+            response = asyncio.run(send_message(message_received['message']))
+            signal_sender.send_message_to_number(message_received['sender'], response, "")
+
+
+class SignalApplication:
+
+    def __init__(self, executor=subprocess):
+        self.signal_messages = SignalMessage()
+        self.signal_application = executor.Popen(SignalApplication.__signal_command(["daemon", "--system"]),
+                                                 stdout=subprocess.PIPE)
+        self.signal_sender = SignalMessageSender(executor)
+        self.receive_thread = threading.Thread(target=receive_signal_messages,
+                                               args=(self.signal_application, self.signal_messages, self.signal_sender),
+                                               daemon=True)
+        self.receive_thread.start()
+        print("Process started")
+
+    def send_message_to_number(self, number, message_to_send, attachment):
+        return self.signal_sender.send_message_to_number(number, message_to_send, attachment)
+
+    def send_message_to_group(self, group, message_to_send, attachment):
+        return self.signal_sender.send_message_to_group(group, message_to_send, attachment)
+
+    def get_groups(self):
+        return self.signal_sender.get_groups()
+
+    @staticmethod
+    def __signal_command(command):
+        return [f'/{SIGNAL_CLI_PATH}/bin/signal-cli',
+                "--config",
+                os.environ["SIGNAL_CONFIG_PATH"],
+                "-u",
+                os.environ["PHONE_NUMBER"],
+                *command]
 
 
 def app(injected_signal=None):

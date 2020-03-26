@@ -15,6 +15,7 @@
     "config:rw"
   ],
   "name": "Signal",
+  "homeassistant_api": true,
   "options": {
     "phone_number": "+0102030405",
     "signal_config_path": "/config/.signal"
@@ -25,5 +26,5 @@
   },
   "slug": "signal",
   "startup": "before",
-  "version": "10.5.2"
+  "version": "10.6.0"
 }
