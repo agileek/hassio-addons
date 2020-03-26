@@ -9,9 +9,12 @@ import tempfile
 import re
 from signal_message import SignalMessage
 from ws import send_message
+import logging
+import logging.config
 
 SIGNAL_CLI_PATH = "/signal-cli"
 group_id_matcher = re.compile(r'^[0-9a-f ]+\n$')
+logging.config.fileConfig('logging.conf')
 
 
 class SignalMessageSender:
@@ -19,24 +22,24 @@ class SignalMessageSender:
         self.executor = executor
 
     def send_message_to_number(self, number, message_to_send, attachment):
-        print(f'Sending {message_to_send} to {number}, with attachment {attachment}')
+        logging.info(f'Sending {message_to_send} to {number}, with attachment {attachment}')
         my_command = self.executor.Popen(
             f'dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.sendMessage string:"{message_to_send}" array:string:"{attachment}" string:"{number}"',
             shell=True, stdout=self.executor.PIPE)
         my_command.wait()
-        print(my_command)
+        logging.info(my_command)
 
     def send_message_to_group(self, group, message_to_send, attachment):
-        print(f'Sending {message_to_send} to {group}, with attachment {attachment}')
+        logging.info(f'Sending {message_to_send} to {group}, with attachment {attachment}')
         group_to_byte = ','.join([f'0x{group[i:i + 2]}' for i in range(0, len(group), 2)])
         my_command = self.executor.Popen(
             f'dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.sendGroupMessage string:"{message_to_send}" array:string:"{attachment}" array:byte:"{group_to_byte}"',
             shell=True, stdout=self.executor.PIPE)
         my_command.wait()
-        print(my_command)
+        logging.info(my_command)
 
     def get_groups(self):
-        print(f'Retrieving groups')
+        logging.info(f'Retrieving groups')
         groups_command = self.executor.Popen(
             f'dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.getGroupIds',
             shell=True, stdout=self.executor.PIPE)
@@ -52,7 +55,7 @@ class SignalMessageSender:
                     shell=True, stdout=subprocess.PIPE)
                 group_name_command.wait()
                 group_name = group_name_command.stdout.readline()
-                print(f'Name: {group_name.decode("ascii").strip()}, id: {group_hexa}')
+                logging.info(f'Name: {group_name.decode("ascii").strip()}, id: {group_hexa}')
                 groups[group_name.decode("ascii").strip()] = group_hexa
         return groups
 
@@ -71,6 +74,7 @@ def receive_signal_messages(signal_process: subprocess.Popen, signal_messages: S
 class SignalApplication:
 
     def __init__(self, executor=subprocess):
+        logging.info("Init")
         self.signal_messages = SignalMessage()
         self.signal_application = executor.Popen(SignalApplication.__signal_command(["daemon", "--system"]),
                                                  stdout=subprocess.PIPE)
@@ -79,7 +83,7 @@ class SignalApplication:
                                                args=(self.signal_application, self.signal_messages, self.signal_sender),
                                                daemon=True)
         self.receive_thread.start()
-        print("Process started")
+        logging.info("Process started")
 
     def send_message_to_number(self, number, message_to_send, attachment):
         return self.signal_sender.send_message_to_number(number, message_to_send, attachment)

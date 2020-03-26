@@ -1,3 +1,6 @@
+import logging
+
+
 class SignalMessage:
     keywords = ["Envelope from",
                 "Timestamp",
@@ -38,6 +41,7 @@ class SignalMessage:
         if self.body_start:
             if self.__line_contains_keyword__(line):
                 self.body_start = False
+                logging.info(f'message received {self.constructing_message}')
                 self.messages.append(self.constructing_message)
                 self.constructing_message = {}
             else:
@@ -50,6 +54,6 @@ class SignalMessage:
 
     def get_messages(self):
         return self.messages
-    
-    def read_message(self): 
+
+    def read_message(self):
         return self.messages.pop(0) if len(self.messages) > 0 else {}
