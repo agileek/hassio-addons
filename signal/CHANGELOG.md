@@ -1,5 +1,9 @@
 # Changelog
 
+## 10.6.0
+
+- Add capacity to talk to home assistant
+
 ## 10.5.2
 
 - Really fix compatibility problem with official signal integration

@@ -61,3 +61,4 @@ def test_retrieve_groups(client, executor):
         ['//signal-cli/bin/signal-cli', '--config', 'path_to_signal', '-u', '+0102030405', 'daemon', '--system'],
         'dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.getGroupIds',
         'dbus-send --system --type=method_call --print-reply=literal --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.getGroupName array:byte:0x010203040506']
+
