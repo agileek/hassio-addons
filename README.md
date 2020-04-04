@@ -7,3 +7,7 @@
 ## [Signal](/signal)
 
 Signal cli wrapper
+
+## [Syncthing](/syncthing)
+
+Forked from https://github.com/bestlibre/hassio-addons
