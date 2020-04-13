@@ -11,10 +11,11 @@ from signal_message import SignalMessage
 from ws import send_message
 import logging
 import logging.config
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
 SIGNAL_CLI_PATH = "/signal-cli"
 group_id_matcher = re.compile(r'^[0-9a-f ]+\n$')
-logging.config.fileConfig('logging.conf')
+logging.config.fileConfig(f'{dir_path}/logging.conf')
 
 
 class SignalMessageSender:

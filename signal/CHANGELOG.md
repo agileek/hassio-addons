@@ -1,5 +1,10 @@
 # Changelog
 
+## 10.7.0
+
+- Update signal-cli to 0.6.7
+- Update docker base image to 5.1.0
+
 ## 10.6.0
 
 - Add capacity to talk to home assistant

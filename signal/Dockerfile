@@ -1,7 +1,7 @@
-ARG BUILD_FROM=hassioaddons/base-python:3.0.2
+ARG BUILD_FROM=hassioaddons/base-python:5.1.0
 FROM $BUILD_FROM
 
-ENV SIGNAL_VERSION=0.6.5 \
+ENV SIGNAL_VERSION=0.6.7 \
     LANG=C.UTF-8 \
     JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk \
     PATH="/usr/lib/jvm/java-1.8-openjdk/bin:${PATH}"

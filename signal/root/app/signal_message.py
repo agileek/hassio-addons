@@ -47,7 +47,9 @@ class SignalMessage:
             else:
                 self.constructing_message['message'] = self.constructing_message['message'] + '\n' + line
         if line.startswith('Sender:'):
-            self.constructing_message['sender'] = line.split(' ')[1]
+            splitted_sender = line.split(' ')
+            sender = [s for s in splitted_sender if s.startswith("+")]
+            self.constructing_message['sender'] = sender[0]
         if line.startswith('Body:'):
             self.body_start = True
             self.constructing_message['message'] = line[6:]

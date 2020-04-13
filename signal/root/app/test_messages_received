@@ -271,3 +271,10 @@ Group info:
   Name: Maison
   Type: DELIVER
 
+Envelope from: unknown source
+Timestamp: 1586777568904 (2020-04-13T11:32:48.904Z)
+Sent by unidentified/sealed sender
+Sender: “null” +330102030405 (device: 1)
+Message timestamp: 1586777568904 (2020-04-13T11:32:48.904Z)
+Body: Plop
+Profile key update, key length:32
