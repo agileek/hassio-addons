@@ -7,6 +7,7 @@ import json
 import subprocess
 import tempfile
 import re
+import socket
 from signal_message import SignalMessage
 from ws import send_message
 import logging
@@ -84,7 +85,7 @@ class SignalApplication:
                                                args=(self.signal_application, self.signal_messages, self.signal_sender),
                                                daemon=True)
         self.receive_thread.start()
-        logging.info("Process started")
+        logging.info(f'Process started and listening on {socket.gethostname()}')
 
     def send_message_to_number(self, number, message_to_send, attachment):
         return self.signal_sender.send_message_to_number(number, message_to_send, attachment)

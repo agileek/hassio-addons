@@ -1,5 +1,9 @@
 # Changelog
 
+## 10.7.1
+
+- add hostname to startup logs
+
 ## 10.7.0
 
 - Update signal-cli to 0.6.7
