@@ -96,5 +96,30 @@ Once you have the group ids, you can easily send messages by using the `notify.s
 ![Send to Group](images/send_to_group.png?raw=true "Send to group")
 
 
+### Talking to homeassistant
+
+Added in 10.6.0, you can now talk to homeassistant using intents.
+
+If you are not familiar with intents, here is a quick setup to see if everything works fine.
+
+First, Configure your conversations:
+
+```yaml
+conversation:
+  intents:
+    Test:
+      - Test
+      - This is a test
+```
+
+Then configure your intents replies:
+```yaml
+intent_script:
+  Test:
+    speech:
+      text: "Hello there"
+```
+
+Once home assistant is restarted, by sending `Test` or `This is a test` to signal, you should get `Hello there`.
 
 ## [Changelog](CHANGELOG.md)
