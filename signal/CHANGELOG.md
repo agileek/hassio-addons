@@ -1,5 +1,10 @@
 # Changelog
 
+## 10.8.0
+
+- remotely build image
+- fewer docker layers
+
 ## 10.7.1
 
 - add hostname to startup logs

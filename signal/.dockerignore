@@ -3,3 +3,4 @@
 
 # Explicitly add the things we need.
 !/root
+.pytest_cache
