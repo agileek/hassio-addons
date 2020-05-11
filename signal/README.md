@@ -122,4 +122,8 @@ intent_script:
 
 Once home assistant is restarted, by sending `Test` or `This is a test` to signal, you should get `Hello there`.
 
+## Docker image deployment
+
+Deployed using `docker run --rm --privileged -v ~/.docker:/root/.docker:ro -v $PWD:/data homeassistant/amd64-builder --all -t /data`
+
 ## [Changelog](CHANGELOG.md)
