@@ -11,16 +11,16 @@ async def send_message(message: str):
         logging.info(f'Sending message to {uri}')
         async with websockets.connect(uri) as websocket:
 
-            logging.info(f'Connecting to websocket')
+            logging.debug(f'Connecting to websocket')
             await websocket.recv()
-            logging.info(f'Connected to websocket')
+            logging.debug(f'Connected to websocket')
 
             await websocket.send(json.dumps({
                 "type": "auth",
                 "access_token": os.environ.get("SUPERVISOR_TOKEN")
             }))
             auth_response = json.loads(await websocket.recv())
-            logging.info(f'Authenticated to websocket')
+            logging.debug(f'Authenticated to websocket')
             if "type" in auth_response and auth_response["type"] == "auth_ok":
                 await websocket.send(json.dumps({
                     "id": 1,

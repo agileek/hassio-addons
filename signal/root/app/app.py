@@ -17,6 +17,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 SIGNAL_CLI_PATH = "/signal-cli"
 group_id_matcher = re.compile(r'^[0-9a-f ]+\n$')
 logging.config.fileConfig(f'{dir_path}/logging.conf')
+logging.getLogger().setLevel(os.environ.get("LOG_LEVEL", "INFO"))
 
 
 class SignalMessageSender:
@@ -29,7 +30,7 @@ class SignalMessageSender:
             f'dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.sendMessage string:"{message_to_send}" array:string:"{attachment}" string:"{number}"',
             shell=True, stdout=self.executor.PIPE)
         my_command.wait()
-        logging.info(my_command)
+        logging.debug(my_command)
 
     def send_message_to_group(self, group, message_to_send, attachment):
         logging.info(f'Sending {message_to_send} to {group}, with attachment {attachment}')
@@ -38,7 +39,7 @@ class SignalMessageSender:
             f'dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.sendGroupMessage string:"{message_to_send}" array:string:"{attachment}" array:byte:"{group_to_byte}"',
             shell=True, stdout=self.executor.PIPE)
         my_command.wait()
-        logging.info(my_command)
+        logging.debug(my_command)
 
     def get_groups(self):
         logging.info(f'Retrieving groups')
@@ -64,8 +65,10 @@ class SignalMessageSender:
 
 def receive_signal_messages(signal_process: subprocess.Popen, signal_messages: SignalMessage,
                             signal_sender: SignalMessageSender):
+    logging.info('Listening to incoming messages')
     for line in iter(signal_process.stdout.readline, ''):
         cleaned_line = line.decode('utf8').rstrip()
+        logging.debug(f'receiving new line {cleaned_line}')
         signal_messages.new_line_received(cleaned_line)
         message_received = signal_messages.read_message()
         if message_received != {}:

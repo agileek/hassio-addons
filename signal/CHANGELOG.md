@@ -1,5 +1,10 @@
 # Changelog
 
+## 10.8.1
+
+- added capacity to change log level
+- added debug logs
+
 ## 10.8.0
 
 - remotely build image

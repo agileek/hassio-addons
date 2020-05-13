@@ -45,6 +45,7 @@ class SignalMessage:
                 self.messages.append(self.constructing_message)
                 self.constructing_message = {}
             else:
+                logging.debug(f'receiving message {self.constructing_message}, waiting for end sequence')
                 self.constructing_message['message'] = self.constructing_message['message'] + '\n' + line
         if line.startswith('Sender:'):
             splitted_sender = line.split(' ')
