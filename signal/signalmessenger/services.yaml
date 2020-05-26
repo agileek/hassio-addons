@@ -1,1 +1,3 @@
 # empty, as user defines name of service
+get_groups:
+  description: retrieve signal groups (id + name)
