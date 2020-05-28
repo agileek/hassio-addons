@@ -1,5 +1,10 @@
 # Changelog
 
+## 10.9.0
+
+- signal cli updated to 0.6.8
+  - No more libmatthew for dbus \o/
+
 ## 10.8.1
 
 - added capacity to change log level

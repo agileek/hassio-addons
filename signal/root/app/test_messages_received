@@ -278,3 +278,15 @@ Sender: “null” +330102030405 (device: 1)
 Message timestamp: 1586777568904 (2020-04-13T11:32:48.904Z)
 Body: Plop
 Profile key update, key length:32
+
+Envelope from: unknown source
+Timestamp: 1590647962834 (2020-05-28T06:39:22.834Z)
+Sent by unidentified/sealed sender
+Sender: “null” +330102030405 (device: 2)
+Message timestamp: 1590647962834 (2020-05-28T06:39:22.834Z)
+Profile key update, key length:32
+Reaction:
+ - Emoji: 👍
+ - Target author: +330605040302
+ - Target timestamp: 1590647735431
+ - Is remove: false
