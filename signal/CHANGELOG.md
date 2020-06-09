@@ -1,5 +1,9 @@
 # Changelog
 
+## 10.9.1
+
+- fix log levels
+  
 ## 10.9.0
 
 - signal cli updated to 0.6.8

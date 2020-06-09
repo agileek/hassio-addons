@@ -17,7 +17,19 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 SIGNAL_CLI_PATH = "/signal-cli"
 group_id_matcher = re.compile(r'^[0-9a-f ]+\n$')
 logging.config.fileConfig(f'{dir_path}/logging.conf')
-logging.getLogger().setLevel(os.environ.get("LOG_LEVEL", "INFO"))
+
+log_levels = {
+    "NOTSET": logging.NOTSET,
+    "DEBUG": logging.DEBUG,
+    "INFO": logging.INFO,
+    "WARNING": logging.WARNING,
+    "ERROR": logging.ERROR,
+    "CRITICAL": logging.CRITICAL,
+}
+
+retrieved_log_level = log_levels.get(os.environ.get("SIGNAL_LOG_LEVEL", "INFO").upper(), logging.INFO)
+print(f'SETTING LOG LEVEL TO {retrieved_log_level}')
+logging.getLogger().setLevel(retrieved_log_level)
 
 
 class SignalMessageSender:
