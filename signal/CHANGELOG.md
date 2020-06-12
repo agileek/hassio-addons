@@ -1,9 +1,13 @@
 # Changelog
 
+## 10.9.2
+
+- reverting to 10.8.1 image for aarch64 image
+
 ## 10.9.1
 
 - fix log levels
-  
+
 ## 10.9.0
 
 - signal cli updated to 0.6.8
