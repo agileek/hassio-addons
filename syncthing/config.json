@@ -1,6 +1,6 @@
 {
     "name": "Syncthing",
-    "version": "1.7.0",
+    "version": "1.7.1",
     "slug": "syncthing",
     "description": "syncthing synchronization service",
     "url": "https://github.com/agileek/hassio-addons/tree/master/syncthing",
@@ -8,7 +8,7 @@
     "boot": "auto",
     "options": {},
     "schema": {},
-    "ports": {"8384/tcp": 8384, "22000/tcp": null, "21027/udp": 21027},
+    "ports": {"8384/tcp": 8384, "22000/tcp": 22000, "21027/udp": 21027},
     "map": ["share:rw", "config:rw", "backup:rw", "addons:rw"],
     "webui": "http://[HOST]:[PORT:8384]",
     "arch": ["armv7", "armhf", "amd64", "aarch64", "i386"]
