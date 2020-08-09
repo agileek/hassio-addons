@@ -28,6 +28,6 @@
   },
   "slug": "signal",
   "startup": "before",
-  "version": "10.9.2",
+  "version": "10.9.3",
   "image": "agileek/hassio-{arch}-signal"
 }

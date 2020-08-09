@@ -7,7 +7,7 @@ ENV SIGNAL_VERSION=0.6.8 \
     PATH="/usr/lib/jvm/java-1.8-openjdk/bin:${PATH}"
 
 COPY root /
-RUN apk add --no-cache openjdk8 dbus jq && \
+RUN apk add --no-cache openjdk8 dbus jq java-jffi-native && \
     curl -L "https://github.com/AsamK/signal-cli/releases/download/v${SIGNAL_VERSION}/signal-cli-${SIGNAL_VERSION}.tar.gz" --output "/signal-cli-${SIGNAL_VERSION}.tar.gz" && \
     tar xvzf /signal-cli-${SIGNAL_VERSION}.tar.gz -C / && \
     mv /signal-cli-${SIGNAL_VERSION} /signal-cli && \

@@ -1,5 +1,9 @@
 # Changelog
 
+## 10.9.3
+
+- installing jffi-native system-wide for aarch64 image
+
 ## 10.9.2
 
 - reverting to 10.8.1 image for aarch64 image
