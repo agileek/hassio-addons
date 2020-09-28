@@ -1,5 +1,10 @@
 # Changelog
 
+## 10.10.0
+
+- update signal to 0.6.11
+- update to java 11
+
 ## 10.9.3
 
 - installing jffi-native system-wide for aarch64 image

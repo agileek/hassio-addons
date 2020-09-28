@@ -19,7 +19,7 @@
   "options": {
     "phone_number": "+0102030405",
     "signal_config_path": "/config/.signal",
-    "log_level": "INFO"
+    "log_level": "DEBUG"
   },
   "schema": {
     "phone_number": "str",
@@ -28,6 +28,6 @@
   },
   "slug": "signal",
   "startup": "before",
-  "version": "10.9.3",
+  "version": "10.10.0",
   "image": "agileek/hassio-{arch}-signal"
 }
