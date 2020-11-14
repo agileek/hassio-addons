@@ -81,6 +81,9 @@ def receive_signal_messages(signal_process: subprocess.Popen, signal_messages: S
     for line in iter(signal_process.stdout.readline, ''):
         if signal_process.poll() is not None:
             logging.error('signal has been terminated, check the logs for more information')
+            for error_line in iter(signal_process.stdout.readline, b''): # b'\n'-separated lines
+                logging.info(error_line)
+            logging.error('signal logs printed')
             # 4 is for stopping gunicorn
             os._exit(4)
         cleaned_line = line.decode('utf8').rstrip()
