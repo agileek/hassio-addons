@@ -1,4 +1,4 @@
-ARG BUILD_FROM=hassioaddons/base-python:5.3.1
+ARG BUILD_FROM=hassioaddons/base-python:5.3.3
 FROM $BUILD_FROM
 
 ENV SIGNAL_VERSION=0.6.11 \
