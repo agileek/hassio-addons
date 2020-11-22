@@ -10,6 +10,6 @@ export SIGNAL_CONFIG_PATH
 export SIGNAL_LOG_LEVEL
 
 dbus-uuidgen --ensure=/etc/machine-id
-dbus-daemon --system --nopidfile
+/etc/init.d/dbus start
 cd /app || exit
 gunicorn -w 1 -b 0.0.0.0:5000 wsgi:app
