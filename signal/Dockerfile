@@ -16,7 +16,7 @@ RUN apt update && apt install -y dbus jq python3 python3-pip && \
     tar xvzf /jre11.tar.gz -C / && \
     mv /jdk-11.0.9.1+1-jre /jre && \
     rm /jre11.tar.gz && \
-    pip install -r /app/requirements.txt
+    pip3 install -r /app/requirements.txt
 #https://github.com/poppyschmo/znc-signal/blob/master/docker/Dockerfile
 
 
