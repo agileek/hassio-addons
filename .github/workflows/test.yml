@@ -16,6 +16,8 @@ jobs:
       - name: Get information
         id: info
         uses: home-assistant/actions/helpers/info@master
+        with:
+          path: signal/
 
   build:
     name: Test action build
