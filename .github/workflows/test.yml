@@ -31,19 +31,10 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v2
 
-      - name: Build the builder
+      - name: Test ${{ matrix.architecture }} build
         uses: home-assistant/builder@master
         with:
           args: |
             --test \
-            --amd64 \
-            --target /signal \
-            --generic latest
-      - name: Test ${{ matrix.architecture }} builder
-        uses: ./
-        with:
-          args: |
-            --test \
             --${{ matrix.architecture }} \
-            --target /signal \
-            --generic ${{ github.sha }}
+            --target /data/signal
