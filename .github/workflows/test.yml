@@ -37,7 +37,7 @@ jobs:
           args: |
             --test \
             --amd64 \
-            --target /data \
+            --target /signal \
             --generic latest
       - name: Test ${{ matrix.architecture }} builder
         uses: ./
@@ -45,5 +45,5 @@ jobs:
           args: |
             --test \
             --${{ matrix.architecture }} \
-            --target /data \
+            --target /signal \
             --generic ${{ github.sha }}
