@@ -1,10 +1,10 @@
 {
   "args": {},
   "build_from": {
-    "aarch64": "hassioaddons/base-python-aarch64:5.3.3",
-    "amd64": "hassioaddons/base-python-amd64:5.3.3",
-    "armhf": "hassioaddons/base-python-armhf:5.3.3",
-    "armv7": "hassioaddons/base-python-armv7:5.3.3",
-    "i386": "hassioaddons/base-python-i386:5.3.3"
+    "aarch64": "hassioaddons/aarch64-base-debian:buster",
+    "amd64": "hassioaddons/amd64-base-debian:buster",
+    "armhf": "hassioaddons/armhf-base-debian:buster",
+    "armv7": "hassioaddons/armv7-base-debian:buster",
+    "i386": "hassioaddons/i386-base-debian:buster"
   }
 }
