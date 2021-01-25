@@ -1,10 +1,10 @@
 {
   "args": {},
   "build_from": {
-    "aarch64": "hassioaddons/aarch64-base-debian:buster",
-    "amd64": "hassioaddons/amd64-base-debian:buster",
-    "armhf": "hassioaddons/armhf-base-debian:buster",
-    "armv7": "hassioaddons/armv7-base-debian:buster",
-    "i386": "hassioaddons/i386-base-debian:buster"
+    "aarch64": "homeassistant/aarch64-base-debian:buster",
+    "amd64": "homeassistant/amd64-base-debian:buster",
+    "armhf": "homeassistant/armhf-base-debian:buster",
+    "armv7": "homeassistant/armv7-base-debian:buster",
+    "i386": "homeassistant/i386-base-debian:buster"
   }
 }
