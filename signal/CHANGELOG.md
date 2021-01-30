@@ -1,5 +1,18 @@
 # Changelog
 
+## 10.11.1
+
+- fix zkgroup library
+- if you use groups v2, you'll have to update the profile of your account
+    - `/signal-cli/bin/signal-cli --config ${SIGNAL_CONFIG_PATH} -u ${PHONE_NUMBER} updateProfile --name "Name of the account"`
+
+## 10.11.0
+
+- update signal to 0.7.4
+- update to latest JRE
+- switch on debian based image
+- image automatically built by github actions
+
 ## 10.10.0
 
 - update signal to 0.6.11
