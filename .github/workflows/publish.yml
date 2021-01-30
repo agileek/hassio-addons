@@ -3,7 +3,7 @@ name: 'Publish'
 on:
   release:
     types: [published]
-
+  push:
 jobs:
   init:
     name: Initialize build
