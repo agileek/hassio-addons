@@ -9,9 +9,9 @@ COPY root /
 
 RUN arch="$(uname -m)"; \
         case "$arch" in \
-            aarch64) cp /ext/libraries/zkgroup/${ZKGROUP_VERSION}/arm64/libzkgroup.so /tmp/libzkgroup.so ;; \
-			armv7l) cp /ext/libraries/zkgroup/${ZKGROUP_VERSION}/armv7/libzkgroup.so /tmp/libzkgroup.so ;; \
-            x86_64) cp /ext/libraries/zkgroup/${ZKGROUP_VERSION}/x86-64/libzkgroup.so /tmp/libzkgroup.so ;; \
+            aarch64) cp /ext/libraries/zkgroup/v${ZKGROUP_VERSION}/arm64/libzkgroup.so /tmp/libzkgroup.so ;; \
+			armv7l) cp /ext/libraries/zkgroup/v${ZKGROUP_VERSION}/armv7/libzkgroup.so /tmp/libzkgroup.so ;; \
+            x86_64) cp /ext/libraries/zkgroup/v${ZKGROUP_VERSION}/x86-64/libzkgroup.so /tmp/libzkgroup.so ;; \
         esac;
 
 RUN apt update && apt install -y dbus jq python3 python3-pip default-jre zip && \
