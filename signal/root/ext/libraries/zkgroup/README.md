@@ -1,6 +1,3 @@
-# Copied FROM https://github.com/bbernhard/signal-cli-rest-api
-
-
 # HOWTO BUILD
 
 [cross](https://github.com/rust-embedded/cross) is used for cross compiling zkgroup.

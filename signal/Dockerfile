@@ -2,15 +2,16 @@ ARG BUILD_FROM=homeassistant/amd64-base-debian:buster
 FROM $BUILD_FROM
 
 ENV SIGNAL_VERSION=0.7.4 \
+    ZKGROUP_VERSION=0.7.0 \
     LANG=C.UTF-8
 
 COPY root /
 
 RUN arch="$(uname -m)"; \
         case "$arch" in \
-            aarch64) cp /ext/libraries/zkgroup/v0.7.1/arm64/libzkgroup.so /tmp/libzkgroup.so ;; \
-			armv7l) cp /ext/libraries/zkgroup/v0.7.1/armv7/libzkgroup.so /tmp/libzkgroup.so ;; \
-            x86_64) cp /ext/libraries/zkgroup/v0.7.1/x86-64/libzkgroup.so /tmp/libzkgroup.so ;; \
+            aarch64) cp /ext/libraries/zkgroup/${ZKGROUP_VERSION}/arm64/libzkgroup.so /tmp/libzkgroup.so ;; \
+			armv7l) cp /ext/libraries/zkgroup/${ZKGROUP_VERSION}/armv7/libzkgroup.so /tmp/libzkgroup.so ;; \
+            x86_64) cp /ext/libraries/zkgroup/${ZKGROUP_VERSION}/x86-64/libzkgroup.so /tmp/libzkgroup.so ;; \
         esac;
 
 RUN apt update && apt install -y dbus jq python3 python3-pip default-jre zip && \
