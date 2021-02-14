@@ -1,5 +1,9 @@
 # Changelog
 
+## 10.11.2
+
+- remove deprecation messages
+
 ## 10.11.1
 
 - fix zkgroup library
