@@ -9,7 +9,7 @@
   "boot": "auto",
   "description": "Addon for wrapping signal inside docker",
   "devices": [
-    "/dev/urandom:/dev/random:rwm"
+    "/dev/urandom"
   ],
   "map": [
     "config:rw"
@@ -27,7 +27,7 @@
     "log_level": "str"
   },
   "slug": "signal",
-  "startup": "before",
-  "version": "10.11.1",
+  "startup": "services",
+  "version": "10.11.2",
   "image": "agileek/hassio-{arch}-signal"
 }
