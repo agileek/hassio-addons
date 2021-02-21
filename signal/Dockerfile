@@ -1,7 +1,7 @@
 ARG BUILD_FROM=homeassistant/amd64-base-debian:buster
 FROM $BUILD_FROM
 
-ENV SIGNAL_VERSION=0.7.4 \
+ENV SIGNAL_VERSION=0.8.0 \
     ZKGROUP_VERSION=0.7.0 \
     LANG=C.UTF-8
 

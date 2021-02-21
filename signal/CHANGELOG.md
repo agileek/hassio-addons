@@ -1,5 +1,9 @@
 # Changelog
 
+## 10.12.0
+
+- Upgrade to signal-cli 0.8.0
+
 ## 10.11.2
 
 - remove deprecation messages
