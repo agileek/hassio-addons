@@ -1,5 +1,9 @@
 # Changelog
 
+## 10.13.0
+
+- Use file name when forwarding image 
+
 ## 10.12.1
 
 - Embed native libsignal
