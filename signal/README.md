@@ -9,6 +9,17 @@ First, follow https://github.com/AsamK/signal-cli
 
 Once you registered your phone number on signal-cli, move the storage (https://github.com/AsamK/signal-cli#storage) in the configuration folder of home assistant.
 
+You should have something like that
+
+```bash
+/config
+└── .signal
+    ├── attachments
+    ├── avatars
+    └── data
+        ├── +331234567
+        └── +331234567.d
+```
 After that, you can install the hassio signal addon
 
 ### The home assistant plugin
