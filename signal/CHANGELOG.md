@@ -1,5 +1,9 @@
 # Changelog
 
+## 10.12.1
+
+- Embed native libsignal
+
 ## 10.12.0
 
 - Upgrade to signal-cli 0.8.0

@@ -3,15 +3,19 @@ FROM $BUILD_FROM
 
 ENV SIGNAL_VERSION=0.8.0 \
     ZKGROUP_VERSION=0.7.0 \
+    LIBSIGNAL_VERSION=0.2.3 \
     LANG=C.UTF-8
 
 COPY root /
 
 RUN arch="$(uname -m)"; \
         case "$arch" in \
-            aarch64) cp /ext/libraries/zkgroup/v${ZKGROUP_VERSION}/arm64/libzkgroup.so /tmp/libzkgroup.so ;; \
-			armv7l) cp /ext/libraries/zkgroup/v${ZKGROUP_VERSION}/armv7/libzkgroup.so /tmp/libzkgroup.so ;; \
-            x86_64) cp /ext/libraries/zkgroup/v${ZKGROUP_VERSION}/x86-64/libzkgroup.so /tmp/libzkgroup.so ;; \
+            aarch64) cp /ext/libraries/zkgroup/v${ZKGROUP_VERSION}/arm64/libzkgroup.so /tmp/libzkgroup.so ; \
+                     cp /ext/libraries/libsignal-client/v${LIBSIGNAL_VERSION}/arm64/libsignal_jni.so /tmp/libsignal_jni.so ;; \
+			armv7l) cp /ext/libraries/zkgroup/v${ZKGROUP_VERSION}/armv7/libzkgroup.so /tmp/libzkgroup.so ; \
+                    cp /ext/libraries/libsignal-client/v${LIBSIGNAL_VERSION}/armv7/libsignal_jni.so /tmp/libsignal_jni.so ;; \
+            x86_64) cp /ext/libraries/zkgroup/v${ZKGROUP_VERSION}/x86-64/libzkgroup.so /tmp/libzkgroup.so ; \
+                    cp /ext/libraries/libsignal-client/v${LIBSIGNAL_VERSION}/x86-64/libsignal_jni.so /tmp/libsignal_jni.so ;; \
         esac;
 
 RUN apt update && apt install -y dbus jq python3 python3-pip default-jre zip && \
@@ -21,6 +25,7 @@ RUN apt update && apt install -y dbus jq python3 python3-pip default-jre zip && 
     rm /signal-cli-${SIGNAL_VERSION}.tar.gz && \
     cd /tmp && \
     zip -u /signal-cli/lib/zkgroup-java-*.jar libzkgroup.so && \
+    zip -u /signal-cli/lib/signal-client-java-*.jar libsignal_jni.so && \
     cd - && \
     pip3 install -r /app/requirements.txt
 
