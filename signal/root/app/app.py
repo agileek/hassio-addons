@@ -147,8 +147,9 @@ def app(injected_signal=None):
         message_content = message_to_send['content']
         attachment = ""
         if 'file' in request.files:
-            f = tempfile.NamedTemporaryFile()
-            f.write(request.files['file'].read())
+            file = request.files['file']
+            f = tempfile.NamedTemporaryFile(suffix=file.filename)
+            f.write(file.read())
             f.flush()
             attachment = f.name
         if "number" in message_to_send:
