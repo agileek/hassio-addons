@@ -148,7 +148,7 @@ def app(injected_signal=None):
         attachment = ""
         if 'file' in request.files:
             file = request.files['file']
-            f = tempfile.NamedTemporaryFile(suffix=file.filename)
+            f = tempfile.NamedTemporaryFile(suffix=os.path.basename(file.filename))
             f.write(file.read())
             f.flush()
             attachment = f.name
