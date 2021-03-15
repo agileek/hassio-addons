@@ -4,8 +4,8 @@ FROM $BUILD_FROM
 ARG BUILD_VERSION
 ARG BUILD_ARCH
 
-# Add env
-ENV LANG C.UTF-8
+# Prevent syncthing from auto upgrading
+ENV LANG=C.UTF-8 STNOUPGRADE=1
 
 # Setup base
 RUN apk add --no-cache -U --virtual .build-deps \
