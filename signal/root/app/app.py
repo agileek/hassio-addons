@@ -36,8 +36,15 @@ class SignalMessageSender:
     def __init__(self, executor=subprocess):
         self.executor = executor
 
+    @staticmethod
+    def __log_message(message_to_send, attachment, number_or_group):
+        text = f'Sending "{message_to_send}" to {number_or_group}'
+        if attachment:
+            text += f'with attachment {attachment}'
+        logging.info(text)
+
     def send_message_to_number(self, number, message_to_send, attachment):
-        logging.info(f'Sending {message_to_send} to {number}, with attachment {attachment}')
+        SignalMessageSender.__log_message(message_to_send=message_to_send, attachment=attachment, number_or_group=number)
         my_command = self.executor.Popen(
             f'dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.sendMessage string:"{message_to_send}" array:string:"{attachment}" string:"{number}"',
             shell=True, stdout=self.executor.PIPE)
@@ -45,7 +52,7 @@ class SignalMessageSender:
         logging.debug(my_command)
 
     def send_message_to_group(self, group, message_to_send, attachment):
-        logging.info(f'Sending {message_to_send} to {group}, with attachment {attachment}')
+        SignalMessageSender.__log_message(message_to_send=message_to_send, attachment=attachment, number_or_group=group)
         group_to_byte = ','.join([f'0x{group[i:i + 2]}' for i in range(0, len(group), 2)])
         my_command = self.executor.Popen(
             f'dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.sendGroupMessage string:"{message_to_send}" array:string:"{attachment}" array:byte:"{group_to_byte}"',

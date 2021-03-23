@@ -1,5 +1,10 @@
 # Changelog
 
+## 10.14.0
+
+- Update signal-cli to 0.8.1
+- Improve message logs
+
 ## 10.13.1
 
 - Fix python basename 
