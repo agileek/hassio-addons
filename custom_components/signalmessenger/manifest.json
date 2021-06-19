@@ -2,6 +2,7 @@
   "domain": "signalmessenger",
   "name": "Signal Messenger",
   "documentation": "https://github.com/agileek/hassio-addons/tree/master/signal",
+  "issue_tracker": "https://github.com/agileek/hassio-addons/issues",
   "dependencies": [],
   "codeowners": ["@agileek"],
   "requirements": ["requests==2.22.0"],
