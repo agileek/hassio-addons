@@ -1,0 +1,6 @@
+#!/bin/bash
+
+docker build -t local_signal .
+
+#docker run -ti --entrypoint "" --rm -e HA_WEBSOCKET="wss://home.bitard.fr/api/websocket" -e SUPERVISOR_TOKEN="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI3MWM4ZmUyNzEzMzY0NTkwYmUxNjdlOGM5ZGMyOGQ1YiIsImlhdCI6MTU4NTEyMTExOSwiZXhwIjoxOTAwNDgxMTE5fQ.V675Xw7ZY8zofzBKCexzwW5dSqgFNqDOSkgsfKTJhSc" -e SIGNAL_CONFIG_PATH="/config/.signal" -e PHONE_NUMBER="+33953110562" -v $PWD/my_config.json:/data/options.json:ro  -v /opt/syncthing/hassio-config/.signal/:/config/.signal -p 5000:5000 local_signal bash
+docker run -ti --entrypoint "" --rm -e HA_WEBSOCKET="wss://home.bitard.fr/api/websocket" -e SUPERVISOR_TOKEN="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI3MWM4ZmUyNzEzMzY0NTkwYmUxNjdlOGM5ZGMyOGQ1YiIsImlhdCI6MTU4NTEyMTExOSwiZXhwIjoxOTAwNDgxMTE5fQ.V675Xw7ZY8zofzBKCexzwW5dSqgFNqDOSkgsfKTJhSc" -e SIGNAL_CONFIG_PATH="/config/.signal" -e PHONE_NUMBER="+33953110562" -e SIGNAL_LOG_LEVEL="DEBUG" -v $PWD/my_config.json:/data/options.json:ro  -v /opt/syncthing/hassio-config/.signal/:/config/.signal -p 5000:5000 local_signal bash
