@@ -1,0 +1,5 @@
+{
+	"name": "signalmessenger",
+	"content_in_root": true,
+	"iot_class": "cloud_polling"
+}
