@@ -1,6 +1,6 @@
 # HOWTO BUILD
 
-[cross](https://github.com/rust-embedded/cross) is used for cross compiling zkgroup.
+[cross](https://github.com/rust-embedded/cross) is used for cross compiling libsignal-client.
 
 * download new release from `https://github.com/signalapp/libsignal-client/releases`
 * unzip + change into directory
