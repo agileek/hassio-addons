@@ -13,6 +13,6 @@ jobs:
     steps:
       - uses: "actions/checkout@v2"
       - name: HACS Action
-        uses: "hacs/action@main"
+        uses: "agileek/action@main"
         with:
           category: "integration"
