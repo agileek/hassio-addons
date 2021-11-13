@@ -1,6 +1,6 @@
 {
     "name": "Syncthing",
-    "version": "1.18.3",
+    "version": "1.18.4",
     "slug": "syncthing",
     "description": "syncthing synchronization service",
     "url": "https://github.com/agileek/hassio-addons/tree/master/syncthing",
