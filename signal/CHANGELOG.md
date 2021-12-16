@@ -4,6 +4,7 @@
 
 - Update signal-cli to 0.10.0
 - Update debian buster -> bullseye
+- Update java 11 -> 17
 
 ## 10.17.0
 
