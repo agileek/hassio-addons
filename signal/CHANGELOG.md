@@ -1,5 +1,11 @@
 # Changelog
 
+## 10.18.0
+
+- Update signal-cli to 0.10.0
+- Update debian buster -> bullseye
+- Update java 11 -> 17
+
 ## 10.17.0
 
 - Update signal-cli to 0.9.2

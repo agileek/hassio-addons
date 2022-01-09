@@ -16,7 +16,7 @@ class SignalMessage:
                 " - Action",
                 " - Timestamp",
                 "  Name",
-                "Profile key update, key length"]
+                "Profile key update"]
     keywords_without_data = [
         "Sent by unidentified/sealed sender",
         "Got receipt.",
@@ -47,10 +47,11 @@ class SignalMessage:
             else:
                 logging.debug(f'receiving message {self.constructing_message}, waiting for end sequence')
                 self.constructing_message['message'] = self.constructing_message['message'] + '\n' + line
-        if line.startswith('Sender:'):
+        if line.startswith('Sender:') or line.startswith('Envelope from:'):
             splitted_sender = line.split(' ')
             sender = [s for s in splitted_sender if s.startswith("+")]
-            self.constructing_message['sender'] = sender[0]
+            if len(sender) > 0:
+                self.constructing_message['sender'] = sender[0]
         if line.startswith('Body:'):
             self.body_start = True
             self.constructing_message['message'] = line[6:]

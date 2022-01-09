@@ -105,5 +105,6 @@ def test_signal_message():
                {'message': 'Plop\n', 'sender': '+330102030405'},
                {'message': 'Grill\\xc3\\xa9\n', 'sender': '+330605040302'},
                {'message': 'Hihihihihihi grave\n', 'sender': '+330102030405'},
-               {'message': 'Plop\n', 'sender': '+330102030405'}
+               {'message': 'Plop\n', 'sender': '+330102030405'},
+               {'message': 'New message\n', 'sender': '+330102030406'}
            ] == tested.get_messages()

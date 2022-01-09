@@ -290,3 +290,11 @@ Reaction:
  - Target author: +330605040302
  - Target timestamp: 1590647735431
  - Is remove: false
+
+Envelope from: “Michaël” +330102030406 (device: 2)
+Timestamp: 1639585854126 (2021-12-15T16:30:54.126Z)
+Server timestamps: received: 1639585854329 (2021-12-15T16:30:54.329Z) delivered: 1639585855130 (2021-12-15T16:30:55.130Z)
+Sent by unidentified/sealed sender
+Message timestamp: 1639585854126 (2021-12-15T16:30:54.126Z)
+Body: New message
+Profile key update
