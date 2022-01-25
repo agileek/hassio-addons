@@ -1,5 +1,9 @@
 # Changelog
 
+## 10.18.2
+
+- Update signal-cli to 0.10.2
+
 ## 10.18.1
 
 - Update signal-cli to 0.10.1
