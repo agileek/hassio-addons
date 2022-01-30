@@ -12,6 +12,7 @@
     "/dev/urandom"
   ],
   "map": [
+    "share:rw",
     "config:rw"
   ],
   "name": "Signal",
