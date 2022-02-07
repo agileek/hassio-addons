@@ -1,7 +1,7 @@
 ARG BUILD_FROM=homeassistant/amd64-base-debian:bullseye
 FROM $BUILD_FROM
 
-ENV SIGNAL_VERSION=0.10.2 \
+ENV SIGNAL_VERSION=0.10.3 \
     LIBSIGNAL_VERSION=0.11.0 \
     LANG=C.UTF-8
 
@@ -15,7 +15,7 @@ RUN arch="$(uname -m)"; \
         esac;
 
 RUN apt update && apt install -y dbus jq python3 python3-pip openjdk-17-jre zip && \
-    curl -L "https://github.com/AsamK/signal-cli/releases/download/v${SIGNAL_VERSION}/signal-cli-${SIGNAL_VERSION}.tar.gz" --output "/signal-cli-${SIGNAL_VERSION}.tar.gz" && \
+    curl -L "https://github.com/AsamK/signal-cli/releases/download/v${SIGNAL_VERSION}/signal-cli-${SIGNAL_VERSION}-Linux.tar.gz" --output "/signal-cli-${SIGNAL_VERSION}.tar.gz" && \
     tar xvzf /signal-cli-${SIGNAL_VERSION}.tar.gz -C / && \
     mv /signal-cli-${SIGNAL_VERSION} /signal-cli && \
     rm /signal-cli-${SIGNAL_VERSION}.tar.gz && \
