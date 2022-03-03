@@ -1,5 +1,8 @@
 # Changelog
 
+## 10.18.4
+- Update custom component dependencies
+
 ## 10.18.3
 
 - Update signal-cli to 0.10.3

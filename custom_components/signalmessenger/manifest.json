@@ -5,7 +5,7 @@
   "issue_tracker": "https://github.com/agileek/hassio-addons/issues",
   "dependencies": [],
   "codeowners": ["@agileek"],
-  "requirements": [],
+  "requirements": ["requests==2.27.1"],
   "iot_class": "cloud_polling",
-  "version": "10.14.0"
+  "version": "10.18.4"
 }
