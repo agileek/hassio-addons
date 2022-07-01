@@ -1,6 +1,9 @@
 # Changelog
 
 
+## 10.19.2
+- fix replace libsignal_jni.so in good jar
+
 ## 10.19.1
 - fix init: false in latest ha docker images
 
