@@ -1,6 +1,10 @@
 # Changelog
 
-## 10.19.3
+
+## 10.19.1
+- fix init: false in latest ha docker images
+
+## 10.19.0
 - Update signal-cli to 0.10.8
 - Update libsignal-jni to 0.17.0
 - Update python dependencies (flask 2.1.2, gunicorn 20.1.0, websockets 10.3)
