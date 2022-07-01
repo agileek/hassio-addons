@@ -1,5 +1,11 @@
 # Changelog
 
+## 10.19.3
+- Update signal-cli to 0.10.8
+- Update libsignal-jni to 0.17.0
+- Update python dependencies (flask 2.1.2, gunicorn 20.1.0, websockets 10.3)
+
+
 ## 10.18.4
 - Update custom component dependencies
 
