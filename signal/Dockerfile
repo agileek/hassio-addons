@@ -20,7 +20,7 @@ RUN apt update && apt install -y dbus jq python3 python3-pip openjdk-17-jre zip 
     mv /signal-cli-${SIGNAL_VERSION} /signal-cli && \
     rm /signal-cli-${SIGNAL_VERSION}.tar.gz && \
     cd /tmp && \
-    zip -u /signal-cli/lib/lib-signal-client-*.jar libsignal_jni.so && \
+    zip -u /signal-cli/lib/libsignal-client-*.jar libsignal_jni.so && \
     cd - && \
     pip3 install -r /app/requirements.txt
 

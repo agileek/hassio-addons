@@ -1,5 +1,7 @@
 # Changelog
 
+## 10.19.3
+- fix typo
 
 ## 10.19.2
 - fix replace libsignal_jni.so in good jar
