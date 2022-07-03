@@ -1,5 +1,8 @@
 # Changelog
 
+## 10.19.4
+- better groups retrieval
+
 ## 10.19.3
 - fix typo
 

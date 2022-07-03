@@ -1,3 +1,4 @@
 .idea
 *.iml
 signal/my_config.json
+signal/local_test

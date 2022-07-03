@@ -16,6 +16,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 SIGNAL_CLI_PATH = "/signal-cli"
 group_id_matcher = re.compile(r'^[0-9a-f ]+\n$')
+group_name_matcher = re.compile(r'^ *string "([^"]+)"\n$')
 logging.config.fileConfig(f'{dir_path}/logging.conf')
 
 log_levels = {
@@ -63,22 +64,27 @@ class SignalMessageSender:
     def get_groups(self):
         logging.info(f'Retrieving groups')
         groups_command = self.executor.Popen(
-            f'dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.getGroupIds',
+            f'dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.listGroups',
             shell=True, stdout=self.executor.PIPE)
         groups_command.wait()
         groups = {}
-        for group_id_raw in groups_command.stdout.readlines():
-            group_id_decoded = group_id_raw.decode('ascii')
-            if group_id_matcher.match(group_id_decoded):
-                group_byte = ','.join([f'0x{i}' for i in group_id_decoded.strip().split(' ')])
-                group_hexa = ''.join(group_id_decoded.strip().split(' '))
-                group_name_command = self.executor.Popen(
-                    f'dbus-send --system --type=method_call --print-reply=literal --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.getGroupName array:byte:{group_byte}',
-                    shell=True, stdout=subprocess.PIPE)
-                group_name_command.wait()
-                group_name = group_name_command.stdout.readline()
-                logging.info(f'Name: {group_name.decode("ascii").strip()}, id: {group_hexa}')
-                groups[group_name.decode("ascii").strip()] = group_hexa
+        group_id=None
+        group_name=None
+        for group_line_raw in groups_command.stdout.readlines():
+            group_line_decoded = group_line_raw.decode('ascii')
+            logging.debug(f'line: {group_line_decoded}')
+            if group_id_matcher.match(group_line_decoded):
+                group_id = ''.join(group_line_decoded.strip().split(' '))
+            match = group_name_matcher.match(group_line_decoded)
+            if match:
+                group_name = match.group(1)
+            if group_id is not None and group_name is not None:
+                if group_name in groups:
+                    logging.warn(f"a group with name {group_name} already exists {groups[group_name]}")
+                logging.info(f'Name: {group_name}, id: {group_id}')
+                groups[group_name] = group_id
+                group_id = None
+                group_name = None
         return groups
 
 
