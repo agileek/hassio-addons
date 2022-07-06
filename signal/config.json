@@ -16,6 +16,7 @@
   ],
   "name": "Signal",
   "homeassistant_api": true,
+  "hassio_api": true,
   "options": {
     "phone_number": "+0102030405",
     "signal_config_path": "/config/.signal",
