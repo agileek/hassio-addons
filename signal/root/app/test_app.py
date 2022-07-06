@@ -51,14 +51,13 @@ def client(executor):
 
 
 def test_retrieve_groups(client, executor):
-    mocked_answers = [[b'010203040506\n'], [b'MyGroup\n']]
+    mocked_answers = [[b'            01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16\n', b'         string "My group"\n']]
     executor.returns(mocked_answers)
     response = client.get('/group')
     data = json.loads(response.data)
     print(data)
-    assert {'MyGroup': '010203040506'} == data
+    assert {'My group': '0102030405060708090a0b0c0d0e0f10111213141516'} == data
     assert executor.commands == [
         ['//signal-cli/bin/signal-cli', '--config', 'path_to_signal', '-u', '+0102030405', 'daemon', '--system'],
-        'dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.getGroupIds',
-        'dbus-send --system --type=method_call --print-reply=literal --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.getGroupName array:byte:0x010203040506']
+        'dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.listGroups']
 
