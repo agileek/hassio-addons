@@ -1,5 +1,9 @@
 # Changelog
 
+## 10.19.5
+- give more permissions to the addon 
+- bump dependencies in custom_component
+
 ## 10.19.4
 - better groups retrieval
 
