@@ -17,6 +17,7 @@
   "name": "Signal",
   "homeassistant_api": true,
   "hassio_api": true,
+  "hassio_role": "homeassistant",
   "options": {
     "phone_number": "+0102030405",
     "signal_config_path": "/config/.signal",
@@ -29,7 +30,7 @@
   },
   "slug": "signal",
   "startup": "services",
-  "version": "10.19.4",
+  "version": "10.19.5",
   "init": false,
   "image": "agileek/hassio-{arch}-signal"
 }
