@@ -27,4 +27,4 @@ RUN apt update && apt install -y dbus jq python3 python3-pip openjdk-17-jre zip 
 #https://github.com/poppyschmo/znc-signal/blob/master/docker/Dockerfile
 
 
-CMD [ "/run.sh" ]
+ENTRYPOINT [ "/run.sh" ]

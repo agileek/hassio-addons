@@ -29,6 +29,8 @@ log_levels = {
 }
 
 retrieved_log_level = log_levels.get(os.environ.get("SIGNAL_LOG_LEVEL", "INFO").upper(), logging.INFO)
+ha_websocket = os.environ.get("HA_WEBSOCKET", "ws://supervisor/core/websocket")
+access_token = os.environ.get("SUPERVISOR_TOKEN")
 print(f'SETTING LOG LEVEL TO {retrieved_log_level}')
 logging.getLogger().setLevel(retrieved_log_level)
 
@@ -104,7 +106,7 @@ def receive_signal_messages(signal_process: subprocess.Popen, signal_messages: S
         signal_messages.new_line_received(cleaned_line)
         message_received = signal_messages.read_message()
         if message_received != {}:
-            response = asyncio.run(send_message(message_received['message']))
+            response = asyncio.run(send_message(ha_websocket, access_token, message_received['message']))
             signal_sender.send_message_to_number(message_received['sender'], response, "")
 
 

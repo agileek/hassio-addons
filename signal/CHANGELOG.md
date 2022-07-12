@@ -1,5 +1,8 @@
 # Changelog
 
+## 10.19.6
+- fix the websocket communication
+
 ## 10.19.5
 - give more permissions to the addon 
 - bump dependencies in custom_component

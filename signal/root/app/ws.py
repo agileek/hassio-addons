@@ -3,13 +3,11 @@ import json
 import os
 import logging
 
-
-async def send_message(message: str):
+async def send_message(ha_websocket: str, access_token: str, message: str):
     response = "Something bad happened" 
     try:
-        uri = os.environ.get("HA_WEBSOCKET", "ws://supervisor/core/websocket")
-        logging.info(f'Sending message to {uri}')
-        async with websockets.connect(uri) as websocket:
+        logging.info(f'Sending message to {ha_websocket}')
+        async with websockets.connect(ha_websocket) as websocket:
 
             logging.debug(f'Connecting to websocket')
             await websocket.recv()
@@ -17,7 +15,7 @@ async def send_message(message: str):
 
             await websocket.send(json.dumps({
                 "type": "auth",
-                "access_token": os.environ.get("SUPERVISOR_TOKEN")
+                "access_token": access_token
             }))
             auth_response = json.loads(await websocket.recv())
             logging.debug(f'Authenticated to websocket')
