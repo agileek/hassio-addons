@@ -27,7 +27,10 @@ jobs:
         with:
           python-version: '3.9'
           cache: 'pip'
-      - run: pip install -r requirements.txt
+          cache-dependency-path: signal/root/app/requirements.txt
+      - run: pip install -r signal/root/app/requirements.txt
+      - run: pip install pytest
+      - run: pytest signal/root
   build:
     name: Test action build
     needs: init
