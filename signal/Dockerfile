@@ -1,7 +1,7 @@
 ARG BUILD_FROM=homeassistant/amd64-base-debian:bullseye
 FROM $BUILD_FROM
 
-ENV SIGNAL_VERSION=0.10.8 \
+ENV SIGNAL_VERSION=0.11.2 \
     LIBSIGNAL_VERSION=0.17.0 \
     LANG=C.UTF-8
 
