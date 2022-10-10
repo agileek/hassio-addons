@@ -1,0 +1,126 @@
+name: build-libsignal
+
+on: workflow_dispatch
+
+env:
+  LIBSIGNAL_VERSION: '0.20.0'
+  GIT_DISCOVERY_ACROSS_FILESYSTEM: 1
+
+jobs:
+  build-x86_64:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          wget https://github.com/signalapp/libsignal/archive/refs/tags/v${{ env.LIBSIGNAL_VERSION }}.zip
+          unzip v${{ env.LIBSIGNAL_VERSION }}.zip
+          cd libsignal-${{ env.LIBSIGNAL_VERSION }}
+          cargo build -p libsignal-jni --release
+          mkdir -p /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}
+          mkdir -p /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/x86-64
+          cp /home/runner/work/hassio-addons/hassio-addons/libsignal-${{ env.LIBSIGNAL_VERSION }}/target/release/libsignal_jni.so /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/x86-64/libsignal_jni.so
+          rm -rf /home/runner/work/hassio-addons/hassio-addons/libsignal-${{ env.LIBSIGNAL_VERSION }}
+          rm /home/runner/work/hassio-addons/hassio-addons/v${{ env.LIBSIGNAL_VERSION }}.zip
+      - uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+  build-arm64:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 10240
+          swap-size-mb: 30720
+          remove-dotnet: 'true'
+          remove-haskell: 'true'
+          remove-android: 'true'
+      - run: |
+          echo "Free space:"
+          df -h
+      - uses: actions/checkout@v3
+      - run: |
+          mkdir -p /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}
+          mkdir -p /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/arm64
+          wget https://github.com/signalapp/libsignal/archive/refs/tags/v${{ env.LIBSIGNAL_VERSION }}.zip
+          unzip v${{ env.LIBSIGNAL_VERSION }}.zip
+          cd libsignal-${{ env.LIBSIGNAL_VERSION }}
+          mkdir -p .cargo
+          CARGO_HOME=$PWD/cargo cargo vendor vendor > .cargo/config.toml
+          cat .cargo/config.toml
+      - uses: pguyot/arm-runner-action@v2
+        with:
+          base_image: dietpi:rpi_armv8_bullseye
+          cpu: cortex-a53
+          cpu_info: cpuinfo/raspberrypi_zero2_w_arm64
+          image_additional_mb: 8192
+          shell: /bin/bash
+          bind_mount_repository: true
+          commands: |
+              test `uname -m` = aarch64
+              grep Model /proc/cpuinfo
+              free -h
+              swapon -s
+              apt update -y
+              apt install -y clang libclang-dev cmake make libprotobuf-dev protobuf-compiler
+              curl https://sh.rustup.rs -sSf | sh -s -- -y
+              source "$HOME/.cargo/env"
+              cd libsignal-${{ env.LIBSIGNAL_VERSION }}
+              cargo build --jobs 1 -p libsignal-jni --release --offline
+              cp ./target/release/libsignal_jni.so ../signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/arm64/libsignal_jni.so
+              cd ..
+              rm -rf libsignal-${{ env.LIBSIGNAL_VERSION }}
+              rm v${{ env.LIBSIGNAL_VERSION }}.zip
+      - uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+  build-armv7:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 10240
+          swap-size-mb: 30720
+          remove-dotnet: 'true'
+          remove-haskell: 'true'
+          remove-android: 'true'
+      - run: |
+          echo "Free space:"
+          df -h
+      - uses: actions/checkout@v3
+      - run: |
+          mkdir -p /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}
+          mkdir -p /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/armv7
+          wget https://github.com/signalapp/libsignal/archive/refs/tags/v${{ env.LIBSIGNAL_VERSION }}.zip
+          unzip v${{ env.LIBSIGNAL_VERSION }}.zip
+          cd libsignal-${{ env.LIBSIGNAL_VERSION }}
+          mkdir -p .cargo
+          CARGO_HOME=$PWD/cargo cargo vendor vendor > .cargo/config.toml
+          cat .cargo/config.toml
+      - uses: pguyot/arm-runner-action@v2
+        with:
+          base_image: dietpi:rpi_armv7_bullseye
+          cpu: cortex-a7
+          cpu_info: cpuinfo/raspberrypi_3b
+          image_additional_mb: 8192
+          shell: /bin/bash
+          bind_mount_repository: true
+          commands: |
+              test `uname -m` = armv7l
+              grep Model /proc/cpuinfo
+              free -h
+              swapon -s
+              apt update -y
+              apt install -y clang libclang-dev cmake make libprotobuf-dev protobuf-compiler
+              curl https://sh.rustup.rs -sSf | sh -s -- -y
+              source "$HOME/.cargo/env"
+              cd libsignal-${{ env.LIBSIGNAL_VERSION }}
+              CARGO_HOME=$PWD/cargo cargo build --jobs 1 -p libsignal-jni --release --offline
+              cp ./target/release/libsignal_jni.so ../signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/armv7/libsignal_jni.so
+              cd ..
+              rm -rf libsignal-${{ env.LIBSIGNAL_VERSION }}
+              rm v${{ env.LIBSIGNAL_VERSION }}.zip
+      - uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
