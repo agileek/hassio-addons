@@ -66,7 +66,7 @@ jobs:
               source "$HOME/.cargo/env"
               cd libsignal-${{ env.LIBSIGNAL_VERSION }}
               cargo build --jobs 1 -p libsignal-jni --release --offline
-              cp libsignal-${{ env.LIBSIGNAL_VERSION }}/target/release/libsignal_jni.so ../signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/arm64/libsignal_jni.so
+              cp ./target/release/libsignal_jni.so ../signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/arm64/libsignal_jni.so
               cd ..
               rm -rf libsignal-${{ env.LIBSIGNAL_VERSION }}
               rm v${{ env.LIBSIGNAL_VERSION }}.zip
@@ -116,7 +116,7 @@ jobs:
               source "$HOME/.cargo/env"
               cd libsignal-${{ env.LIBSIGNAL_VERSION }}
               CARGO_HOME=$PWD/cargo cargo build --jobs 1 -p libsignal-jni --release --offline
-              cp libsignal-${{ env.LIBSIGNAL_VERSION }}/target/release/libsignal_jni.so ../signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/armv7/libsignal_jni.so
+              cp ./target/release/libsignal_jni.so ../signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/armv7/libsignal_jni.so
               cd ..
               rm -rf libsignal-${{ env.LIBSIGNAL_VERSION }}
               rm v${{ env.LIBSIGNAL_VERSION }}.zip
