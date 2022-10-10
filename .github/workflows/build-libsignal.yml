@@ -4,6 +4,7 @@ on: workflow_dispatch
 
 env:
   LIBSIGNAL_VERSION: '0.20.0'
+  GIT_DISCOVERY_ACROSS_FILESYSTEM: 1
 
 jobs:
   build-x86_64:
