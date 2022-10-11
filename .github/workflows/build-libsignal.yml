@@ -21,9 +21,17 @@ jobs:
           cp /home/runner/work/hassio-addons/hassio-addons/libsignal-${{ env.LIBSIGNAL_VERSION }}/target/release/libsignal_jni.so /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/x86-64/libsignal_jni.so
           rm -rf /home/runner/work/hassio-addons/hassio-addons/libsignal-${{ env.LIBSIGNAL_VERSION }}
           rm /home/runner/work/hassio-addons/hassio-addons/v${{ env.LIBSIGNAL_VERSION }}.zip
-      - uses: EndBug/add-and-commit@v9
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
         with:
-          default_author: github_actions
+          commit-message: Update libsignal x86_64 binary to v${{ env.LIBSIGNAL_VERSION }}
+          branch: libsignal-binaries-v${{ env.LIBSIGNAL_VERSION }}
+          title: 'Update libsignal to v${{ env.LIBSIGNAL_VERSION }}'
+          body: |
+            Update of libsignal binaires
+            - Built by the build-libsignal GitHub Action
+            - PR Auto-generated
   build-arm64:
     runs-on: ubuntu-latest
     steps:
@@ -71,9 +79,17 @@ jobs:
               cd ..
               rm -rf libsignal-${{ env.LIBSIGNAL_VERSION }}
               rm v${{ env.LIBSIGNAL_VERSION }}.zip
-      - uses: EndBug/add-and-commit@v9
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
         with:
-          default_author: github_actions
+          commit-message: Update libsignal arm64 binary to v${{ env.LIBSIGNAL_VERSION }}
+          branch: libsignal-binaries-v${{ env.LIBSIGNAL_VERSION }}
+          title: 'Update libsignal to v${{ env.LIBSIGNAL_VERSION }}'
+          body: |
+            Update of libsignal binaires
+            - Built by the build-libsignal GitHub Action
+            - PR Auto-generated
   build-armv7:
     runs-on: ubuntu-latest
     steps:
@@ -121,6 +137,14 @@ jobs:
               cd ..
               rm -rf libsignal-${{ env.LIBSIGNAL_VERSION }}
               rm v${{ env.LIBSIGNAL_VERSION }}.zip
-      - uses: EndBug/add-and-commit@v9
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
         with:
-          default_author: github_actions
+          commit-message: Update libsignal armv7 binary to v${{ env.LIBSIGNAL_VERSION }}
+          branch: libsignal-binaries-v${{ env.LIBSIGNAL_VERSION }}
+          title: 'Update libsignal to v${{ env.LIBSIGNAL_VERSION }}'
+          body: |
+            Update of libsignal binaires
+            - Built by the build-libsignal GitHub Action
+            - PR Auto-generated
