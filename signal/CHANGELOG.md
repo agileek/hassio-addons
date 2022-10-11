@@ -1,5 +1,8 @@
 # Changelog
 
+## 10.20.0
+- Update signal-cli to 0.11.3
+
 ## 10.19.6
 - fix the websocket communication
 
