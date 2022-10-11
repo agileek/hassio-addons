@@ -1,5 +1,8 @@
 # Changelog
 
+## 10.20.1
+- Fix message reception
+
 ## 10.20.0
 - Update signal-cli to 0.11.3
 
