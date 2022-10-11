@@ -16,7 +16,8 @@ class SignalMessage:
                 " - Action",
                 " - Timestamp",
                 "  Name",
-                "Profile key update"]
+                "Profile key update",
+                "With profile key"]
     keywords_without_data = [
         "Sent by unidentified/sealed sender",
         "Got receipt.",

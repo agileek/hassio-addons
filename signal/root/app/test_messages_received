@@ -298,3 +298,11 @@ Sent by unidentified/sealed sender
 Message timestamp: 1639585854126 (2021-12-15T16:30:54.126Z)
 Body: New message
 Profile key update
+
+Envelope from: “Michaël” +330102030406 (device: 2)
+Timestamp: 1665477534236 (2022-10-11T08:38:54.236Z)
+Server timestamps: received: 1665477534366 (2022-10-11T08:38:54.366Z) delivered: 1665477534369 (2022-10-11T08:38:54.369Z)
+Sent by unidentified/sealed sender
+Message timestamp: 1665477534236 (2022-10-11T08:38:54.236Z)
+Body: 0.11.3 message
+With profile key
