@@ -26,8 +26,8 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: Update libsignal x86_64 binary to v${{ env.LIBSIGNAL_VERSION }}
-          branch: libsignal-binaries-v${{ env.LIBSIGNAL_VERSION }}
-          title: 'Update libsignal to v${{ env.LIBSIGNAL_VERSION }}'
+          branch: libsignal-binaries-x86_64-v${{ env.LIBSIGNAL_VERSION }}
+          title: 'Update libsignal x86_64 binary to v${{ env.LIBSIGNAL_VERSION }}'
           body: |
             Update of libsignal binaires
             - Built by the build-libsignal GitHub Action
@@ -84,8 +84,8 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: Update libsignal arm64 binary to v${{ env.LIBSIGNAL_VERSION }}
-          branch: libsignal-binaries-v${{ env.LIBSIGNAL_VERSION }}
-          title: 'Update libsignal to v${{ env.LIBSIGNAL_VERSION }}'
+          branch: libsignal-binaries-arm64-v${{ env.LIBSIGNAL_VERSION }}
+          title: 'Update libsignal arm64 binary to v${{ env.LIBSIGNAL_VERSION }}'
           body: |
             Update of libsignal binaires
             - Built by the build-libsignal GitHub Action
@@ -142,8 +142,8 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: Update libsignal armv7 binary to v${{ env.LIBSIGNAL_VERSION }}
-          branch: libsignal-binaries-v${{ env.LIBSIGNAL_VERSION }}
-          title: 'Update libsignal to v${{ env.LIBSIGNAL_VERSION }}'
+          branch: libsignal-binaries-armv7-v${{ env.LIBSIGNAL_VERSION }}
+          title: 'Update libsignal armv7 binary to v${{ env.LIBSIGNAL_VERSION }}'
           body: |
             Update of libsignal binaires
             - Built by the build-libsignal GitHub Action
