@@ -1,5 +1,8 @@
 # Changelog
 
+## 10.20.2
+- Log exception on websocket error
+
 ## 10.20.1
 - Fix message reception
 

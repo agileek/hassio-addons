@@ -35,6 +35,6 @@ async def send_message(ha_websocket: str, access_token: str, message: str):
                     logging.error(f'unexpected response {conversation_response}')
             else:
                 logging.error(f'could not authenticate with home assistant {auth_response}')
-    except Exception as e:
-        logging.error(f'Unexpected error {e}')
+    except Exception:
+        logging.exception('Unexpected error')
     return response
