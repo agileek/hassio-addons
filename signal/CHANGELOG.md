@@ -1,5 +1,8 @@
 # Changelog
 
+## 10.20.3
+- Log full websocket response in debug mode
+
 ## 10.20.2
 - Log exception on websocket error
 

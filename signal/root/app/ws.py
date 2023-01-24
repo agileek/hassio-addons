@@ -26,11 +26,12 @@ async def send_message(ha_websocket: str, access_token: str, message: str):
                     "text": message,
                 }))
                 conversation_response = json.loads(await websocket.recv())
+                logging.debug(f'response {conversation_response}')
                 if "type" in conversation_response and "success" in conversation_response:
                     if conversation_response["success"] and conversation_response["type"] == "result":
                         response = conversation_response['result']['speech']['plain']['speech']
                     else:
-                        logging.error(f'did not receive an expected response from home assistant {conversation_response}')
+                        logging.error(f'did not receive an expected response from home assistant')
                 else:
                     logging.error(f'unexpected response {conversation_response}')
             else:
