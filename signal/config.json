@@ -30,7 +30,7 @@
   },
   "slug": "signal",
   "startup": "services",
-  "version": "10.20.2",
+  "version": "10.21.0",
   "init": false,
   "image": "agileek/hassio-{arch}-signal"
 }

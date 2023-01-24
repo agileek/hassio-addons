@@ -1,5 +1,8 @@
 # Changelog
 
+## 10.21.0
+- Update signal-cli to 0.11.6
+
 ## 10.20.2
 - Log exception on websocket error
 
