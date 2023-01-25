@@ -1,5 +1,12 @@
 # HOWTO BUILD
 
+Thanks to https://github.com/agileek/hassio-addons/pull/47 this is now done using a github action workflow.
+
+Just go to https://github.com/agileek/hassio-addons/actions/workflows/build-libsignal.yml and run a workflow on your branch, after modifying the LIBSIGNAL_VERSION in .github/workflows/build-libsignal.yml
+
+
+# OLD
+
 [cross](https://github.com/rust-embedded/cross) is used for cross compiling libsignal-client.
 
 * download new release from `https://github.com/signalapp/libsignal-client/releases`
