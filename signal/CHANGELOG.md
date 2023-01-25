@@ -1,5 +1,8 @@
 # Changelog
 
+## 10.21.0
+- Fix breaking change in websocket conversation response
+
 ## 10.20.3
 - Log full websocket response in debug mode
 
