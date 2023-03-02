@@ -2,3 +2,5 @@
 *.iml
 signal/my_config.json
 signal/local_test
+signal/.signal
+signal/.signal_backup

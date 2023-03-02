@@ -3,7 +3,7 @@ name: build-libsignal
 on: workflow_dispatch
 
 env:
-  LIBSIGNAL_VERSION: '0.20.0'
+  LIBSIGNAL_VERSION: '0.21.1'
   GIT_DISCOVERY_ACROSS_FILESYSTEM: 1
 
 jobs:
@@ -12,22 +12,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          wget https://github.com/signalapp/libsignal/archive/refs/tags/v${{ env.LIBSIGNAL_VERSION }}.zip
-          unzip v${{ env.LIBSIGNAL_VERSION }}.zip
-          cd libsignal-${{ env.LIBSIGNAL_VERSION }}
-          cargo build -p libsignal-jni --release
-          mkdir -p /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}
+          wget https://github.com/signalapp/libsignal/releases/download/v${{ env.LIBSIGNAL_VERSION }}/libsignal_jni.so
           mkdir -p /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/x86-64
-          cp /home/runner/work/hassio-addons/hassio-addons/libsignal-${{ env.LIBSIGNAL_VERSION }}/target/release/libsignal_jni.so /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/x86-64/libsignal_jni.so
-          rm -rf /home/runner/work/hassio-addons/hassio-addons/libsignal-${{ env.LIBSIGNAL_VERSION }}
-          rm /home/runner/work/hassio-addons/hassio-addons/v${{ env.LIBSIGNAL_VERSION }}.zip
+          mv /home/runner/work/hassio-addons/hassio-addons/libsignal_jni.so /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/x86-64/libsignal_jni.so
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: Update libsignal x86_64 binary to v${{ env.LIBSIGNAL_VERSION }}
-          branch: libsignal-binaries-v${{ env.LIBSIGNAL_VERSION }}
-          title: 'Update libsignal to v${{ env.LIBSIGNAL_VERSION }}'
+          branch: libsignal-binaries-x86_64-v${{ env.LIBSIGNAL_VERSION }}
+          title: 'Update libsignal x86_64 binary to v${{ env.LIBSIGNAL_VERSION }}'
           body: |
             Update of libsignal binaires
             - Built by the build-libsignal GitHub Action
@@ -84,8 +78,8 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: Update libsignal arm64 binary to v${{ env.LIBSIGNAL_VERSION }}
-          branch: libsignal-binaries-v${{ env.LIBSIGNAL_VERSION }}
-          title: 'Update libsignal to v${{ env.LIBSIGNAL_VERSION }}'
+          branch: libsignal-binaries-arm64-v${{ env.LIBSIGNAL_VERSION }}
+          title: 'Update libsignal arm64 binary to v${{ env.LIBSIGNAL_VERSION }}'
           body: |
             Update of libsignal binaires
             - Built by the build-libsignal GitHub Action
@@ -142,8 +136,8 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: Update libsignal armv7 binary to v${{ env.LIBSIGNAL_VERSION }}
-          branch: libsignal-binaries-v${{ env.LIBSIGNAL_VERSION }}
-          title: 'Update libsignal to v${{ env.LIBSIGNAL_VERSION }}'
+          branch: libsignal-binaries-armv7-v${{ env.LIBSIGNAL_VERSION }}
+          title: 'Update libsignal armv7 binary to v${{ env.LIBSIGNAL_VERSION }}'
           body: |
             Update of libsignal binaires
             - Built by the build-libsignal GitHub Action

@@ -1,5 +1,8 @@
 # Changelog
 
+## 10.22.0
+- Update signal-cli to 0.11.6
+
 ## 10.21.0
 - Fix breaking change in websocket conversation response
 
