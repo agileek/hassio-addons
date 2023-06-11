@@ -11,7 +11,7 @@ from .const import signal_url
 
 ATTR_FILE = "file"
 
-REQUIREMENTS = ["requests==2.28.2"]
+REQUIREMENTS = ["requests"]
 
 _LOGGER = logging.getLogger("signalmessenger")
 
