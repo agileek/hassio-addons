@@ -17,6 +17,7 @@ jobs:
           mkdir -p /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/x86-64
           mv /home/runner/work/hassio-addons/hassio-addons/libsignal_folder/libsignal_jni.so /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/x86-64/libsignal_jni.so
           rm -rf /home/runner/work/hassio-addons/hassio-addons/libsignal_folder/
+          rm libsignal-client.jar
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v4
