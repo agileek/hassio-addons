@@ -7,5 +7,5 @@
   "codeowners": ["@agileek"],
   "requirements": ["requests"],
   "iot_class": "cloud_polling",
-  "version": "10.22.1"
+  "version": "10.23.0"
 }
