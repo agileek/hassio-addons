@@ -13,4 +13,5 @@ dbus-uuidgen --ensure=/etc/machine-id
 mkdir /var/run/dbus
 dbus-daemon --system --nopidfile
 cd /app || exit
+source ~/.python_signal/bin/activate
 gunicorn -w 1 -b 0.0.0.0:5000 wsgi:app
