@@ -8,7 +8,8 @@
 ![Supports i386 Architecture][i386-badge]
 
 [![Add repository on my Home Assistant][repository-badge]][repository-url]
-[![Install on my Home Assistant][install-badge]][install-url]
+[![Install Signal on my Home Assistant][install-badge]][install-signal-url]
+[![Install Syncthing on my Home Assistant][install-badge]][install-syncthing-url]
 [![Sponsor][sponsor-badge]][sponsor-url]
 
 [aarch64-badge]: https://img.shields.io/badge/aarch64-yes-green.svg?style=for-the-badge
@@ -23,7 +24,8 @@
 [repository-badge]: https://img.shields.io/badge/Add%20repository%20to%20my-Home%20Assistant-41BDF5?logo=home-assistant&style=for-the-badge
 [publish-badge]: https://img.shields.io/github/actions/workflow/status/agileek/hassio-addons/publish.yml?branch=master&style=for-the-badge
 
-[install-url]: https://my.home-assistant.io/redirect/supervisor_addon?addon=243ffc37_syncthing
+[install-syncthing-url]: https://my.home-assistant.io/redirect/supervisor_addon?addon=243ffc37_syncthing
+[install-signal-url]: https://my.home-assistant.io/redirect/supervisor_addon?addon=4a36bbd1-signal
 [repository-url]: https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fagileek%2Fhassio-addons
 
 ## Pre-built images
