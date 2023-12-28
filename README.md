@@ -8,8 +8,8 @@
 ![Supports i386 Architecture][i386-badge]
 
 [![Add repository on my Home Assistant][repository-badge]][repository-url]
-[![Install Signal on my Home Assistant][install-badge]][install-signal-url]
-[![Install Syncthing on my Home Assistant][install-badge]][install-syncthing-url]
+[![Install Signal on my Home Assistant][install-signal-badge]][install-signal-url]
+[![Install Syncthing on my Home Assistant][install-syncthing-badge]][install-syncthing-url]
 [![Sponsor][sponsor-badge]][sponsor-url]
 
 [aarch64-badge]: https://img.shields.io/badge/aarch64-yes-green.svg?style=for-the-badge
@@ -18,7 +18,8 @@
 [armv7-badge]: https://img.shields.io/badge/armv7-yes-green.svg?style=for-the-badge
 [i386-badge]: https://img.shields.io/badge/i386-yes-green.svg?style=for-the-badge
 [stage-badge]: https://img.shields.io/badge/Addon%20stage-stable-green.svg?style=for-the-badge
-[install-badge]: https://img.shields.io/badge/Install%20on%20my-Home%20Assistant-41BDF5?logo=home-assistant&style=for-the-badge
+[install-signal-badge]: https://img.shields.io/badge/Install%20Signal%20on%20my-Home%20Assistant-41BDF5?logo=home-assistant&style=for-the-badge
+[install-syncthing-badge]: https://img.shields.io/badge/Install%20Syncthing%20on%20my-Home%20Assistant-41BDF5?logo=home-assistant&style=for-the-badge
 [sponsor-badge]: https://img.shields.io/badge/Sponsor-%23d32f2f?logo=github&style=for-the-badge&logoColor=white
 [sponsor-url]: https://github.com/sponsors/agileek
 [repository-badge]: https://img.shields.io/badge/Add%20repository%20to%20my-Home%20Assistant-41BDF5?logo=home-assistant&style=for-the-badge
