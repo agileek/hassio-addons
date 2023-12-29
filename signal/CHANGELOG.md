@@ -1,8 +1,11 @@
 # Changelog
 
+## 10.24.0
+- Update signal-cli to 0.12.7
+
 ## 10.23.0
 - Update signal-cli to 0.12.2
-- Update base image to debien bookworm
+- Update base image to debian bookworm
 - update python dependencies
 
 ## 10.22.1
