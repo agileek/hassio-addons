@@ -15,7 +15,7 @@ RUN arch="$(uname -m)"; \
         esac;
 
 RUN apt update && apt install -y dbus jq python3 python3-pip openjdk-17-jre zip python3-venv && \
-    curl -L "https://github.com/AsamK/signal-cli/releases/download/v${SIGNAL_VERSION}/signal-cli-${SIGNAL_VERSION}-Linux.tar.gz" --output "/signal-cli-${SIGNAL_VERSION}.tar.gz" && \
+    curl -L "https://github.com/AsamK/signal-cli/releases/download/v${SIGNAL_VERSION}/signal-cli-${SIGNAL_VERSION}.tar.gz" --output "/signal-cli-${SIGNAL_VERSION}.tar.gz" && \
     tar xvzf /signal-cli-${SIGNAL_VERSION}.tar.gz -C / && \
     mv /signal-cli-${SIGNAL_VERSION} /signal-cli && \
     rm /signal-cli-${SIGNAL_VERSION}.tar.gz && \
