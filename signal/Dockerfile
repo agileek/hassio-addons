@@ -1,7 +1,7 @@
 ARG BUILD_FROM=homeassistant/amd64-base-debian:bookworm
 FROM $BUILD_FROM
 
-ENV SIGNAL_VERSION=0.12.7 \
+ENV SIGNAL_VERSION=0.12.8 \
     LIBSIGNAL_VERSION=0.36.1 \
     LANG=C.UTF-8
 
