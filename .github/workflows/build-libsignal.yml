@@ -3,12 +3,9 @@ name: build-libsignal
 on: workflow_dispatch
 
 env:
-  LIBSIGNAL_VERSION: '0.39.2'
+  LIBSIGNAL_VERSION: '0.36.1'
   GIT_DISCOVERY_ACROSS_FILESYSTEM: 1
 
-concurrency:
-  group: ${{ github.workflow }}
-  cancel-in-progress: true
 jobs:
   build-x86_64:
     runs-on: ubuntu-latest

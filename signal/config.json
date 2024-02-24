@@ -1,5 +1,6 @@
 {
   "arch": [
+    "armhf",
     "armv7",
     "aarch64",
     "amd64",
@@ -29,7 +30,7 @@
   },
   "slug": "signal",
   "startup": "services",
-  "version": "11.0.0",
+  "version": "10.25.0",
   "init": false,
   "image": "agileek/hassio-{arch}-signal"
 }
