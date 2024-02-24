@@ -3,6 +3,9 @@ name: 'Test'
 on:
   push:
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
 jobs:
   init:
     name: Initialize build
