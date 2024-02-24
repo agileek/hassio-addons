@@ -1,5 +1,9 @@
 # Changelog
 
+## 10.26.0
+- Update signal-cli to 0.13.0
+- Update Java 21
+
 ## 10.25.0
 - Update signal-cli to 0.12.8
 
