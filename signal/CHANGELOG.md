@@ -1,7 +1,7 @@
 # Changelog
 
-## 11.0.0
-- Update signal-cli to 0.13.0
+## 11.1.0
+- Update signal-cli to 0.13.4
 - Update Java 21
 - Drop support for armhf
 
