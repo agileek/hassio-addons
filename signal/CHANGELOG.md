@@ -1,5 +1,8 @@
 # Changelog
 
+## 11.2.0
+- Update signal-cli to 0.13.9
+
 ## 11.1.0
 - Update signal-cli to 0.13.4
 - Update Java 21
@@ -41,7 +44,7 @@
 - fix the websocket communication
 
 ## 10.19.5
-- give more permissions to the addon 
+- give more permissions to the addon
 - bump dependencies in custom_component
 
 ## 10.19.4
@@ -102,11 +105,11 @@
 
 ## 10.13.1
 
-- Fix python basename 
+- Fix python basename
 
 ## 10.13.0
 
-- Use file name when forwarding image 
+- Use file name when forwarding image
 
 ## 10.12.1
 
