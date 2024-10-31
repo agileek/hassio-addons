@@ -15,10 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: |
-          curl -Lo libsignal-client.jar "https://repo1.maven.org/maven2/org/signal/libsignal-client/${{ env.LIBSIGNAL_VERSION }}/libsignal-client-${{ env.LIBSIGNAL_VERSION }}.jar"
-          unzip libsignal-client.jar -d libsignal_folder/
+          curl -Lo libsignal_jni.so "https://gitlab.com/packaging/libsignal-client/-/jobs/artifacts/v${{ env.LIBSIGNAL_VERSION }}/raw/libsignal-client/amd64/libsignal_jni.so?job=libsignal-client-amd64"
           mkdir -p /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/x86-64
-          mv /home/runner/work/hassio-addons/hassio-addons/libsignal_folder/libsignal_jni.so /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/x86-64/libsignal_jni.so
+          mv /home/runner/work/hassio-addons/hassio-addons/libsignal_jni.so /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/x86-64/libsignal_jni.so
           rm -rf /home/runner/work/hassio-addons/hassio-addons/libsignal_folder/
           rm libsignal-client.jar
       - name: Create Pull Request
