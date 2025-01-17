@@ -3,7 +3,7 @@ name: build-libsignal
 on: workflow_dispatch
 
 env:
-  LIBSIGNAL_VERSION: '0.58.2'
+  LIBSIGNAL_VERSION: '0.64.0'
   GIT_DISCOVERY_ACROSS_FILESYSTEM: 1
 
 concurrency:
@@ -18,8 +18,6 @@ jobs:
           curl -Lo libsignal_jni.so "https://gitlab.com/packaging/libsignal-client/-/jobs/artifacts/v${{ env.LIBSIGNAL_VERSION }}/raw/libsignal-client/amd64/libsignal_jni.so?job=libsignal-client-amd64"
           mkdir -p /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/x86-64
           mv /home/runner/work/hassio-addons/hassio-addons/libsignal_jni.so /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/x86-64/libsignal_jni.so
-          rm -rf /home/runner/work/hassio-addons/hassio-addons/libsignal_folder/
-          rm libsignal-client.jar
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v4

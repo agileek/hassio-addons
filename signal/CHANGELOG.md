@@ -1,5 +1,8 @@
 # Changelog
 
+## 11.3.0
+- Update signal-cli to 0.13.11
+
 ## 11.2.0
 - Update signal-cli to 0.13.9
 
