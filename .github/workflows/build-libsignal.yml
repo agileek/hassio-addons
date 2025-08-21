@@ -3,7 +3,7 @@ name: build-libsignal
 on: workflow_dispatch
 
 env:
-  LIBSIGNAL_VERSION: '0.75.3'
+  LIBSIGNAL_VERSION: '0.76.3'
   GIT_DISCOVERY_ACROSS_FILESYSTEM: 1
 
 concurrency:
