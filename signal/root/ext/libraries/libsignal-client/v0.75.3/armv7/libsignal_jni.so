@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<title>Not Found</title>
+<link rel="stylesheet" href="/assets/errors-fa1b0a527edd0c50736968533c05a2aabff26a3713b238816d6d92c9455dd2c9.css" />
+<link rel="stylesheet" href="/assets/application-65c8aece480dee1da9547304521f97190543eb5741846fa5a177fa9a27bbe6df.css" />
+<link rel="stylesheet" href="/assets/fonts-fae5d3f79948bd85f18b6513a025f863b19636e85b09a1492907eb4b1bb0557b.css" />
+<link rel="stylesheet" href="/assets/tailwind-fee7c79e00da13185668dd57ea6b82248ecaabd93951931d1096f70ddb5bce6e.css" />
+</head>
+<body>
+<div class="page-container">
+<div class="error-container">
+<img alt="404" src="/assets/illustrations/error/error-404-lg-9dfb20cc79e1fe8104e0adb122a710283a187b075b15187e2f184d936a16349c.svg" />
+<h1>
+404: Page not found
+</h1>
+<p>
+Make sure the address is correct and the page has not moved.
+Please contact your GitLab administrator if you think this is a mistake.
+</p>
+<div class="action-container">
+<form class="form-inline-flex" action="/search" accept-charset="UTF-8" method="get"><div class="field">
+<input type="search" name="search" id="search" value="" placeholder="Search for projects, issues, etc." class="form-control" />
+</div>
+<button type="submit" class="gl-button btn btn-md btn-confirm "><span class="gl-button-text">
+Search
+
+</span>
+
+</button></form></div>
+<nav>
+<ul class="error-nav">
+<li>
+<a href="/">Home</a>
+</li>
+<li>
+<a href="/users/sign_in?redirect_to_referer=yes">Sign In / Register</a>
+</li>
+<li>
+<a href="/help">Help</a>
+</li>
+</ul>
+</nav>
+
+</div>
+
+</div>
+<script nonce="OdUiD8Ly7OgN1EZRjH7lZA==">
+//<![CDATA[
+(function(){
+  var goBackElement = document.querySelector('.js-go-back');
+
+  if (goBackElement && history.length > 1) {
+    goBackElement.removeAttribute('hidden');
+
+    goBackElement.querySelector('button').addEventListener('click', function() {
+      history.back();
+    });
+  }
+
+  // We do not have rails_ujs here, so we're manually making a link trigger a form submit.
+  document.querySelector('.js-sign-out-link')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelector('.js-sign-out-form')?.submit();
+  });
+}());
+
+//]]>
+</script></body>
+</html>
