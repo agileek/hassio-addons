@@ -159,4 +159,16 @@ Once home assistant is restarted, by sending `Test` or `This is a test` to signa
 
 Deployed using `docker run --rm --privileged -v ~/.docker:/root/.docker:ro -v $PWD:/data homeassistant/amd64-builder --all -t /data`
 
+## Dbus debug
+
+look into the man page https://github.com/AsamK/signal-cli/blob/master/man/signal-cli-dbus.5.adoc
+
+* list identities : dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" /org/asamk/Signal org.asamk.Signal.listIdentities
+* get identity information: `dbus-send --system --dest=org.asamk.Signal --print-reply $OBJECT_PATH org.freedesktop.DBus.Properties.GetAll string:org.asamk.Signal.Identity`
+* trust number: `dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" $OBJECT_PATH org.asamk.Signal.trust`
+* trust verify : `dbus-send --system --type=method_call --print-reply --dest="org.asamk.Signal" $OBJECT_PATH org.asamk.Signal.trustVerified string:"LIST OF NUMBERS"`
+
+where OBJECT_PATH is obtained with the listIdendities
+
+
 ## [Changelog](CHANGELOG.md)
