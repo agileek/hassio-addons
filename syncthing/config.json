@@ -1,16 +1,32 @@
 {
-    "name": "Syncthing",
-    "version": "1.29.5",
-    "slug": "syncthing",
-    "description": "syncthing synchronization service",
-    "url": "https://github.com/agileek/hassio-addons/tree/master/syncthing",
-    "startup": "system",
-    "boot": "auto",
-    "init": false,
-    "options": {},
-    "schema": {},
-    "ports": {"8384/tcp": 8384, "22000/tcp": 22000, "21027/udp": 21027},
-    "map": ["share:rw", "config:rw", "backup:rw", "addons:rw", "media:rw"],
-    "webui": "http://[HOST]:[PORT:8384]",
-    "arch": ["armv7", "armhf", "amd64", "aarch64", "i386"]
+  "name": "Syncthing",
+  "version": "2.0.7",
+  "slug": "syncthing",
+  "description": "syncthing synchronization service",
+  "url": "https://github.com/agileek/hassio-addons/tree/master/syncthing",
+  "startup": "system",
+  "boot": "auto",
+  "init": false,
+  "options": {},
+  "schema": {},
+  "ports": {
+    "8384/tcp": 8384,
+    "22000/tcp": 22000,
+    "21027/udp": 21027
+  },
+  "map": [
+    "share:rw",
+    "config:rw",
+    "backup:rw",
+    "addons:rw",
+    "media:rw"
+  ],
+  "webui": "http://[HOST]:[PORT:8384]",
+  "arch": [
+    "armv7",
+    "armhf",
+    "amd64",
+    "aarch64",
+    "i386"
+  ]
 }
