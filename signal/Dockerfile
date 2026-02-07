@@ -10,6 +10,7 @@ COPY root /
 RUN arch="$(uname -m)"; \
   case "$arch" in \
   aarch64) cp /ext/libraries/libsignal-client/v${LIBSIGNAL_VERSION}/arm64/libsignal_jni.so /tmp/libsignal_jni.so ;; \
+  x86_64) cp /ext/libraries/libsignal-client/v${LIBSIGNAL_VERSION}/x86-64/libsignal_jni.so /tmp/libsignal_jni.so ;; \
   esac;
 
 RUN apt update && apt install -y gnupg

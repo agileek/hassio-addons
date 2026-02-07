@@ -10,6 +10,27 @@ concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
 jobs:
+  build-x86_64:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          curl -Lo libsignal_jni.tar.gz "https://github.com/exquo/signal-libs-build/releases/download/libsignal_v${{ env.LIBSIGNAL_VERSION }}/libsignal_jni.so-v${{ env.LIBSIGNAL_VERSION }}-x86_64-unknown-linux-gnu.tar.gz"
+          mkdir -p /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/x86-64
+          tar xvzf libsignal_jni.tar.gz
+          rm libsignal_jni.tar.gz
+          mv /home/runner/work/hassio-addons/hassio-addons/libsignal_jni.so /home/runner/work/hassio-addons/hassio-addons/signal/root/ext/libraries/libsignal-client/v${{ env.LIBSIGNAL_VERSION }}/x86-64/libsignal_jni.so
+      - name: Create Pull Request
+        id: cpr
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: Update libsignal x86_64 binary to v${{ env.LIBSIGNAL_VERSION }}
+          branch: libsignal-binaries-x86_64-v${{ env.LIBSIGNAL_VERSION }}
+          title: 'Update libsignal x86_64 binary to v${{ env.LIBSIGNAL_VERSION }}'
+          body: |
+            Update of libsignal binaires
+            - Built by the build-libsignal GitHub Action
+            - PR Auto-generated
   build-arm64:
     runs-on: ubuntu-latest
     steps:
