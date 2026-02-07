@@ -1,4 +1,4 @@
-ARG BUILD_FROM=amd64-base-debian:trixie
+ARG BUILD_FROM=home-assistant/amd64-base-debian:trixie
 FROM $BUILD_FROM
 
 ENV SIGNAL_VERSION=0.13.24 \
