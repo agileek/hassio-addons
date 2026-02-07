@@ -1,5 +1,9 @@
 # Changelog
 
+## 12.0.0
+- Remove deprecated archs (armv7, i386)
+- Update signal-cli to 0.13.24
+
 ## 11.5.0
 - Update signal-cli to 0.13.18
 
