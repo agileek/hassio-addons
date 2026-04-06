@@ -1,8 +1,8 @@
 ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base-debian:trixie
 FROM $BUILD_FROM
 
-ENV SIGNAL_VERSION=0.13.24 \
-  LIBSIGNAL_VERSION=0.87.0 \
+ENV SIGNAL_VERSION=0.14.2 \
+  LIBSIGNAL_VERSION=0.90.0 \
   LANG=C.UTF-8
 
 COPY root /
@@ -17,7 +17,7 @@ RUN apt update && apt install -y gnupg
 RUN curl -L https://download.bell-sw.com/pki/GPG-KEY-bellsoft | gpg --dearmor -o /usr/share/keyrings/bell-sw.gpg
 RUN echo "deb [signed-by=/usr/share/keyrings/bell-sw.gpg] https://apt.bell-sw.com/ stable main" > /etc/apt/sources.list.d/bellsoft.list
 
-RUN apt update && apt install -y dbus jq python3 python3-pip zip bellsoft-java21-runtime python3-venv && \
+RUN apt update && apt install -y dbus jq python3 python3-pip zip bellsoft-java25-runtime python3-venv && \
   curl -L "https://github.com/AsamK/signal-cli/releases/download/v${SIGNAL_VERSION}/signal-cli-${SIGNAL_VERSION}.tar.gz" --output "/signal-cli-${SIGNAL_VERSION}.tar.gz" && \
   tar xvzf /signal-cli-${SIGNAL_VERSION}.tar.gz -C / && \
   mv /signal-cli-${SIGNAL_VERSION} /signal-cli && \

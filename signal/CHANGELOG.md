@@ -1,5 +1,10 @@
 # Changelog
 
+## 13.0.0
+- Update signal-cli to 0.14.2
+- You have to re-register again :(
+- https://github.com/AsamK/signal-cli/issues/1993
+
 ## 12.0.0
 - Remove deprecated archs (armv7, i386)
 - Update signal-cli to 0.13.24
