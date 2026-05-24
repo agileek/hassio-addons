@@ -1,8 +1,8 @@
 ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base-debian:trixie
 FROM $BUILD_FROM
 
-ENV SIGNAL_VERSION=0.14.2 \
-  LIBSIGNAL_VERSION=0.90.0 \
+ENV SIGNAL_VERSION=0.14.4 \
+  LIBSIGNAL_VERSION=0.94.1 \
   LANG=C.UTF-8
 
 COPY root /
