@@ -1,5 +1,8 @@
 # Changelog
 
+## 13.1.0
+- Update signal-cli to 0.14.4
+
 ## 13.0.0
 - Update signal-cli to 0.14.2
 - You have to re-register again :(
