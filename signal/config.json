@@ -1,16 +1,9 @@
 {
-  "arch": [
-    "aarch64",
-    "amd64"
-  ],
+  "arch": ["aarch64", "amd64"],
   "boot": "auto",
   "description": "Addon for wrapping signal inside docker",
-  "devices": [
-    "/dev/urandom"
-  ],
-  "map": [
-    "config:rw"
-  ],
+  "devices": ["/dev/urandom"],
+  "map": ["config:rw"],
   "name": "Signal",
   "homeassistant_api": true,
   "hassio_api": true,
@@ -27,7 +20,7 @@
   },
   "slug": "signal",
   "startup": "services",
-  "version": "13.2.0",
+  "version": "13.3.0",
   "init": false,
   "image": "agileek/hassio-{arch}-signal"
 }
