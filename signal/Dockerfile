@@ -2,8 +2,8 @@
 # build.yaml as BUILD_FROM, everything arch-specific is decided inside the build via uname -m.
 #
 # Two stages:
-#   prepare  downloads signal-cli and puts the native libsignal library for this architecture
-#            into the jar (same mechanism as before)
+#   prepare  downloads signal-cli and leaves exactly one native libsignal library in the jar:
+#            the bundled one on amd64, the vendored one on aarch64
 #   runtime  Java runtime, dbus, Python venv, and only the files the addon needs to run
 #
 # Build tools (curl, gnupg, zip), apt lists, pip cache and the other architecture's libsignal
@@ -25,14 +25,19 @@ RUN set -eu; \
   apt-get install -y --no-install-recommends ca-certificates curl zip; \
   curl -fsSL "https://github.com/AsamK/signal-cli/releases/download/v${SIGNAL_VERSION}/signal-cli-${SIGNAL_VERSION}.tar.gz" | tar xz -C /; \
   mv "/signal-cli-${SIGNAL_VERSION}" /signal-cli; \
+  jar="$(ls /signal-cli/lib/libsignal-client-*.jar)"; \
+  # libsignal loads the bundled library named libsignal_jni_<os.arch>.so first, then libsignal_jni.so. \
+  # The jar ships libsignal_jni_amd64.so plus macOS .dylib and Windows .dll files; keep exactly one library per image. \
   case "$(uname -m)" in \
-    aarch64) libarch=arm64 ;; \
-    x86_64) libarch=x86-64 ;; \
+    aarch64) \
+      cp /ext/arm64/libsignal_jni.so /tmp/libsignal_jni_aarch64.so; \
+      (cd /tmp && zip -q -u "$jar" libsignal_jni_aarch64.so); \
+      zip -q -d "$jar" libsignal_jni_amd64.so ;; \
+    x86_64) ;; \
     *) echo "unsupported architecture: $(uname -m)" >&2; exit 1 ;; \
   esac; \
-  cp "/ext/${libarch}/libsignal_jni.so" /tmp/libsignal_jni.so; \
-  cd /tmp; \
-  zip -q -u /signal-cli/lib/libsignal-client-*.jar libsignal_jni.so
+  # one call: fails only if neither pattern matches, so a jar without .dll still builds \
+  zip -q -d "$jar" "*.dylib" "*.dll"
 
 # ---------------------------------------------------------------------------- runtime
 FROM $BUILD_FROM
