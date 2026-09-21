@@ -1,7 +1,7 @@
 # Changelog
 
 ## Unreleased
-- Smaller image, same behaviour: multi-stage build that keeps build tools, apt lists, the pip cache and the other architecture's libsignal binary out of the final image (amd64: 1.55 GB -> 852 MB).
+- Smaller image, same behaviour: multi-stage build that keeps build tools, apt lists, the pip cache and the other architecture's libsignal binary out of the final image, and only the one native libsignal library this architecture loads stays in the jar (amd64: 1.61 GB -> 824 MB).
 
 ## 13.4.0
 - New option `allowed_senders`: only messages from these numbers are forwarded to Home Assistant (conversation intents) and answered. Empty (the default) keeps the previous behaviour, every sender.
