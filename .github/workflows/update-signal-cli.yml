@@ -1,0 +1,47 @@
+# Weekly: if AsamK/signal-cli has a newer release than the Dockerfile pins, resolve the matching
+# libsignal-client version, fetch the prebuilt binaries for both architectures from
+# exquo/signal-libs-build, update Dockerfile, workflow, changelog and binaries, open one PR.
+# If exquo has not published the binaries yet (the case that stalled 0.14.8 on 2026-09-11), the run
+# stops with a notice and simply tries again next week.
+
+name: update-signal-cli
+
+on:
+  schedule:
+    - cron: '17 6 * * 1'   # Mondays 06:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve versions and fetch binaries
+        id: resolve
+        run: python3 .github/scripts/update_signal_cli.py
+
+      - name: Create pull request
+        if: steps.resolve.outputs.updated == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: update/signal-cli-${{ steps.resolve.outputs.signal_version }}
+          title: '[signal] update signal-cli to ${{ steps.resolve.outputs.signal_version }}'
+          commit-message: '[signal] update signal-cli to ${{ steps.resolve.outputs.signal_version }} and libsignal-client to ${{ steps.resolve.outputs.libsignal_version }}'
+          body: |
+            Automated update.
+
+            - signal-cli ${{ steps.resolve.outputs.old_signal_version }} -> ${{ steps.resolve.outputs.signal_version }} (release notes: https://github.com/AsamK/signal-cli/releases/tag/v${{ steps.resolve.outputs.signal_version }})
+            - libsignal-client ${{ steps.resolve.outputs.old_libsignal_version }} -> ${{ steps.resolve.outputs.libsignal_version }}, binaries for x86-64 and arm64 from https://github.com/exquo/signal-libs-build/releases/tag/libsignal_v${{ steps.resolve.outputs.libsignal_version }}
+
+            signal-cli releases older than three months may stop working against the Signal servers; merging this and cutting a release keeps the addon receiving.
+          labels: dependencies
+          delete-branch: true
