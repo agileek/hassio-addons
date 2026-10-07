@@ -1,5 +1,8 @@
 # Changelog
 
+## 13.4.0
+- New option `allowed_senders`: only messages from these numbers are forwarded to Home Assistant (conversation intents) and answered. Empty (the default) keeps the previous behaviour, every sender.
+
 ## 13.3.0
 - Update signal-cli to 0.14.8
 

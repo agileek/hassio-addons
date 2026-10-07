@@ -4,10 +4,12 @@ CONFIG_PATH=/data/options.json
 PHONE_NUMBER=$(jq --raw-output ".phone_number" ${CONFIG_PATH})
 SIGNAL_CONFIG_PATH=$(jq --raw-output ".signal_config_path" ${CONFIG_PATH})
 SIGNAL_LOG_LEVEL=$(jq --raw-output ".log_level" ${CONFIG_PATH})
+SIGNAL_ALLOWED_SENDERS=$(jq --raw-output '.allowed_senders // [] | join(",")' ${CONFIG_PATH})
 
 export PHONE_NUMBER
 export SIGNAL_CONFIG_PATH
 export SIGNAL_LOG_LEVEL
+export SIGNAL_ALLOWED_SENDERS
 
 dbus-uuidgen --ensure=/etc/machine-id
 mkdir /var/run/dbus

@@ -155,6 +155,17 @@ intent_script:
 
 Once home assistant is restarted, by sending `Test` or `This is a test` to signal, you should get `Hello there`.
 
+#### Restricting who can talk to home assistant
+
+By default every message the number receives is forwarded to home assistant and answered. With Assist exposing entities, that means anyone who knows the number can control them. Set `allowed_senders` in the addon options to the phone numbers (international format) that may talk to home assistant; messages from other numbers are logged and ignored, without a reply. Include the addon's own number if messages to self should keep working.
+
+```yaml
+allowed_senders:
+  - "+491701234567"
+```
+
+An empty list keeps the old behaviour.
+
 ## Docker image deployment
 
 Deployed using `docker run --rm --privileged -v ~/.docker:/root/.docker:ro -v $PWD:/data homeassistant/amd64-builder --all -t /data`

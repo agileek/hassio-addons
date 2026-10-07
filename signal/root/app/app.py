@@ -31,6 +31,24 @@ log_levels = {
 retrieved_log_level = log_levels.get(os.environ.get("SIGNAL_LOG_LEVEL", "INFO").upper(), logging.INFO)
 ha_websocket = os.environ.get("HA_WEBSOCKET", "ws://supervisor/core/websocket")
 access_token = os.environ.get("SUPERVISOR_TOKEN")
+
+
+def parse_allowed_senders(value):
+    """Comma-separated E.164 numbers from the addon option; empty means every sender is allowed."""
+    if not value:
+        return set()
+    return {''.join(sender.split()) for sender in value.split(',') if sender.strip()}
+
+
+def sender_allowed(sender, allowed_senders):
+    return not allowed_senders or sender in allowed_senders
+
+
+allowed_senders = parse_allowed_senders(os.environ.get("SIGNAL_ALLOWED_SENDERS", ""))
+if allowed_senders:
+    print(f'FORWARDING MESSAGES TO HOME ASSISTANT ONLY FROM {len(allowed_senders)} ALLOWED SENDER(S)')
+else:
+    print('FORWARDING MESSAGES TO HOME ASSISTANT FROM EVERY SENDER (allowed_senders not set)')
 print(f'SETTING LOG LEVEL TO {retrieved_log_level}')
 logging.getLogger().setLevel(retrieved_log_level)
 
@@ -106,8 +124,13 @@ def receive_signal_messages(signal_process: subprocess.Popen, signal_messages: S
         signal_messages.new_line_received(cleaned_line)
         message_received = signal_messages.read_message()
         if message_received != {}:
+            sender = message_received.get('sender')
+            if not sender_allowed(sender, allowed_senders):
+                # neither forwarded to Home Assistant nor answered: an unknown number learns nothing
+                logging.warning(f'ignoring message from {sender}: not in allowed_senders')
+                continue
             response = asyncio.run(send_message(ha_websocket, access_token, message_received['message']))
-            signal_sender.send_message_to_number(message_received['sender'], response, "")
+            signal_sender.send_message_to_number(sender, response, "")
 
 
 class SignalApplication:

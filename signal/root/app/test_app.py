@@ -1,7 +1,25 @@
 import pytest
 import os
-from .app import app, SignalApplication
+from .app import app, SignalApplication, parse_allowed_senders, sender_allowed
 from flask import json
+
+
+def test_parse_allowed_senders():
+    assert parse_allowed_senders("") == set()
+    assert parse_allowed_senders(None) == set()
+    assert parse_allowed_senders("+491701234567") == {"+491701234567"}
+    assert parse_allowed_senders(" +491701234567 , +33612345678,") == {"+491701234567", "+33612345678"}
+    assert parse_allowed_senders("+49 170 1234567") == {"+491701234567"}
+
+
+def test_sender_allowed():
+    everyone = set()
+    assert sender_allowed("+491701234567", everyone)
+    assert sender_allowed(None, everyone)
+    allowed = {"+491701234567"}
+    assert sender_allowed("+491701234567", allowed)
+    assert not sender_allowed("+33612345678", allowed)
+    assert not sender_allowed(None, allowed)
 
 
 class Bunch(dict):

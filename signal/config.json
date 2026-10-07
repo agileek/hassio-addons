@@ -11,16 +11,20 @@
   "options": {
     "phone_number": "+0102030405",
     "signal_config_path": "/config/.signal",
-    "log_level": "DEBUG"
+    "log_level": "DEBUG",
+    "allowed_senders": []
   },
   "schema": {
     "phone_number": "str",
     "signal_config_path": "str",
-    "log_level": "str"
+    "log_level": "str",
+    "allowed_senders": [
+      "match(^\\+[1-9][0-9]{6,14}$)"
+    ]
   },
   "slug": "signal",
   "startup": "services",
-  "version": "13.3.0",
+  "version": "13.4.0",
   "init": false,
   "image": "agileek/hassio-{arch}-signal"
 }
