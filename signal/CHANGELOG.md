@@ -1,5 +1,8 @@
 # Changelog
 
+## 13.6.0
+- Even smaller image: the libsignal jar keeps only the native library this architecture loads (the bundled one on amd64, the vendored one on aarch64) and drops the macOS and Windows binaries (amd64: 896 MB -> 822 MB, arm64: 924 MB -> 783 MB).
+
 ## 13.5.0
 - Smaller image, same behaviour: multi-stage build that keeps build tools, apt lists, the pip cache and the other architecture's libsignal binary out of the final image (amd64: 1.61 GB -> 896 MB).
 
