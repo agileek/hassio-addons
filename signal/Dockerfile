@@ -33,7 +33,9 @@ RUN set -eu; \
       cp /ext/arm64/libsignal_jni.so /tmp/libsignal_jni_aarch64.so; \
       (cd /tmp && zip -q -u "$jar" libsignal_jni_aarch64.so); \
       zip -q -d "$jar" libsignal_jni_amd64.so ;; \
-    x86_64) ;; \
+    x86_64) \
+      # no vendored fallback on amd64 anymore: fail the build, not the addon, if the jar stops bundling it \
+      zip -sf "$jar" | grep -q 'libsignal_jni_amd64\.so$' || { echo "libsignal_jni_amd64.so missing in $jar" >&2; exit 1; } ;; \
     *) echo "unsupported architecture: $(uname -m)" >&2; exit 1 ;; \
   esac; \
   # one call: fails only if neither pattern matches, so a jar without .dll still builds \
