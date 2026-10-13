@@ -2,7 +2,7 @@
 
 Thanks to https://github.com/agileek/hassio-addons/pull/47 this is now done using a github action workflow.
 
-Just go to https://github.com/agileek/hassio-addons/actions/workflows/build-libsignal.yml and run a workflow on your branch, after modifying the LIBSIGNAL_VERSION in .github/workflows/build-libsignal.yml
+Just go to https://github.com/agileek/hassio-addons/actions/workflows/build-libsignal.yml and run a workflow on your branch with the libsignal-client version as input
 
 
 # OLD

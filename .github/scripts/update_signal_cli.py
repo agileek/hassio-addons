@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Compares the signal-cli version pinned in signal/Dockerfile with the latest GitHub release, resolves the
 libsignal-client version that release is built against, downloads the prebuilt libsignal_jni.so for
-arm64 (amd64 uses the one bundled in the jar), and rewrites Dockerfile, build-libsignal.yml, CHANGELOG.md and the binaries folder.
+x86-64 and arm64, and rewrites Dockerfile, CHANGELOG.md and the binaries folder.
 Writes `updated`, versions to $GITHUB_OUTPUT. Exits 0 without changes when nothing is to do or when the
 prebuilt binaries are not published yet (that case is logged as a notice and retried by the schedule).
 
@@ -18,7 +18,6 @@ import urllib.request
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 DOCKERFILE = ROOT / "signal" / "Dockerfile"
-WORKFLOW = ROOT / ".github" / "workflows" / "build-libsignal.yml"
 CHANGELOG = ROOT / "signal" / "CHANGELOG.md"
 BINDIR = ROOT / "signal" / "root" / "ext" / "libraries" / "libsignal-client"
 ARCHES = {"arm64": "aarch64-unknown-linux-gnu"}
@@ -100,8 +99,6 @@ def main():
             (dest / "libsignal_jni.so").write_bytes(tar.extractfile(member).read())
 
     DOCKERFILE.write_text(dockerfile.replace(f"SIGNAL_VERSION={old_signal}", f"SIGNAL_VERSION={latest}").replace(f"LIBSIGNAL_VERSION={old_lib}", f"LIBSIGNAL_VERSION={lib}"), encoding="utf-8")
-    wf = WORKFLOW.read_text(encoding="utf-8")
-    WORKFLOW.write_text(re.sub(r"LIBSIGNAL_VERSION: '[^']+'", f"LIBSIGNAL_VERSION: '{lib}'", wf), encoding="utf-8")
 
     entry = f"- Update signal-cli to {latest} (libsignal-client {lib})\n"
     log = CHANGELOG.read_text(encoding="utf-8")
