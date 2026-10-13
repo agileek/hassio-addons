@@ -1,0 +1,75 @@
+# Weekly: if syncthing/syncthing has a newer release than syncthing/config.json pins, bump the addon
+# version (the Dockerfile downloads exactly that release) and open a PR. Only touches syncthing/,
+# GITHUB_TOKEN may not push changes to workflow files.
+
+name: update-syncthing
+
+on:
+  schedule:
+    - cron: '47 6 * * 1'   # Mondays 06:47 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Compare versions and bump config.json
+        id: resolve
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -eu
+          current="$(jq -r .version syncthing/config.json)"
+          current="${current%-*}"   # addon-only releases look like 2.0.16-1
+          latest="$(gh api repos/syncthing/syncthing/releases/latest --jq .tag_name)"
+          latest="${latest#v}"
+          if ! [[ "$latest" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "::error::unexpected syncthing tag: $latest"
+            exit 1
+          fi
+          if [ "$(printf '%s\n%s\n' "$current" "$latest" | sort -V | tail -n1)" = "$current" ]; then
+            echo "::notice::syncthing $current is current"
+            echo "updated=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # the Dockerfile downloads these, so all of them have to be published already
+          assets="$(gh api "repos/syncthing/syncthing/releases/tags/v$latest" --jq '.assets[].name')"
+          for arch in arm amd64 386 arm64; do
+            if ! grep -qx "syncthing-linux-$arch-v$latest.tar.gz" <<< "$assets"; then
+              echo "::notice::syncthing $latest has no linux-$arch build yet; trying again next run"
+              echo "updated=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          done
+          sed -i -E "s/(\"version\": *\")[^\"]+\"/\1$latest\"/" syncthing/config.json
+          git diff --exit-code --quiet syncthing/config.json && { echo "::error::version not replaced"; exit 1; }
+          echo "syncthing $current -> $latest"
+          {
+            echo "updated=true"
+            echo "old_version=$current"
+            echo "version=$latest"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Create pull request
+        if: steps.resolve.outputs.updated == 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          branch: update/syncthing   # one PR that follows the latest release, not one per release
+          title: '[syncthing] update syncthing to ${{ steps.resolve.outputs.version }}'
+          commit-message: '[syncthing] update syncthing to ${{ steps.resolve.outputs.version }}'
+          body: |
+            Automated update.
+
+            - syncthing ${{ steps.resolve.outputs.old_version }} -> ${{ steps.resolve.outputs.version }} (release notes: https://github.com/syncthing/syncthing/releases/tag/v${{ steps.resolve.outputs.version }})
+          labels: dependencies
+          delete-branch: true
