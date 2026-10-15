@@ -1,6 +1,6 @@
 # Weekly: if AsamK/signal-cli has a newer release than the Dockerfile pins, resolve the matching
-# libsignal-client version, fetch the prebuilt arm64 binary from
-# exquo/signal-libs-build, update Dockerfile, workflow, changelog and binaries, open one PR.
+# libsignal-client version, fetch the prebuilt binaries for both architectures from
+# exquo/signal-libs-build, update Dockerfile, changelog and binaries, open one PR.
 # If exquo has not published the binaries yet (the case that stalled 0.14.8 on 2026-09-11), the run
 # stops with a notice and simply tries again next week.
 
