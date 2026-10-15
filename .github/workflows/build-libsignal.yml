@@ -1,9 +1,14 @@
 name: build-libsignal
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      libsignal_version:
+        description: 'libsignal-client version, e.g. 0.102.1'
+        required: true
 
 env:
-  LIBSIGNAL_VERSION: '0.102.1'
+  LIBSIGNAL_VERSION: ${{ inputs.libsignal_version }}
   GIT_DISCOVERY_ACROSS_FILESYSTEM: 1
 
 concurrency:
