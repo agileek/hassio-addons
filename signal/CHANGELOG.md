@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 13.7.0
 - Update signal-cli to 0.14.9 (libsignal-client 0.103.0)
 
 ## 13.6.0
