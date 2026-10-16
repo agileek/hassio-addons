@@ -1,5 +1,8 @@
 # Changelog
 
+## 13.7.0
+- Update signal-cli to 0.14.9 (libsignal-client 0.103.0)
+
 ## 13.6.0
 - Even smaller image: the libsignal jar keeps only the native library this architecture loads (the bundled one on amd64, the vendored one on aarch64) and drops the macOS and Windows binaries (amd64: 896 MB -> 822 MB, arm64: 924 MB -> 783 MB).
 
