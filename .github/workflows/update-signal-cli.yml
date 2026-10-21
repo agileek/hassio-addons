@@ -23,7 +23,7 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Resolve versions and fetch binaries
         id: resolve
@@ -31,7 +31,7 @@ jobs:
 
       - name: Create pull request
         if: steps.resolve.outputs.updated == 'true'
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           branch: update/signal-cli-${{ steps.resolve.outputs.signal_version }}
           title: '[signal] update signal-cli to ${{ steps.resolve.outputs.signal_version }}'
