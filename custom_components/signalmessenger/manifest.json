@@ -6,6 +6,6 @@
   "documentation": "https://github.com/agileek/hassio-addons/tree/master/signal",
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/agileek/hassio-addons/issues",
-  "requirements": ["requests"],
+  "requirements": [],
   "version": "10.24.0"
 }
