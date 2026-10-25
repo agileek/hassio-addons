@@ -1,5 +1,8 @@
 # Changelog
 
+## 13.8.0
+- Update gunicorn and websockets python dependencies
+
 ## 13.7.0
 - Update signal-cli to 0.14.9 (libsignal-client 0.103.0)
 
