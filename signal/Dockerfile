@@ -14,8 +14,8 @@ ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base-debian:trixie
 # ---------------------------------------------------------------------------- prepare
 FROM $BUILD_FROM AS prepare
 
-ARG SIGNAL_VERSION=0.14.9
-ARG LIBSIGNAL_VERSION=0.103.0
+ARG SIGNAL_VERSION=0.14.10
+ARG LIBSIGNAL_VERSION=0.106.1
 
 # only the native libraries are needed here, not the whole root tree
 COPY root/ext/libraries/libsignal-client/v${LIBSIGNAL_VERSION} /ext
